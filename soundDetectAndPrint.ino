@@ -5,6 +5,8 @@
 
 const int pinButton = 8;
 
+const int pinServo = A2;
+
 const int pinSound1 = A0;               // pin of Sound Sensor
 const int pinSound2 = A1;
 const int pinLed   = 7;                // pin of LED
@@ -30,7 +32,7 @@ const int colorB = 255;
 void setup()
 {
     pinMode(pinLed, OUTPUT);            //set the LED on Digital 12 as an OUTPUT
-    
+    pinMode(pinServo, OUTPUT);
     pinMode(pinButton, INPUT);
     
     lcd.begin(16, 2);
@@ -41,6 +43,8 @@ void loop()
 {
     int sensorValue = analogRead(pinSound1);   //read the sensorValue on Analog 0
     int sensorValue2 = analogRead(pinSound2);
+
+    analogWrite(pinServo, HIGH);
     
     if(sensorValue > sensorOneHigh)
     {
@@ -70,44 +74,21 @@ void loop()
 
     lcd.clear();
 
-    lcd.setCursor(0, 0);
-    lcd.print("SO");
-    lcd.print(sensorValue);
-    
-    lcd.setCursor(6, 0);
-    lcd.print(" H");
-    lcd.print(sensorOneHigh);
-    
-    lcd.setCursor(11, 0);
-    lcd.print(" A");
-    lcd.print(sensorOneAvg);
+    writeSensor1Current(sensorValue);
+    writeSensor1High(sensorOneHigh);
+    writeSensor1Average(sensorOneAvg);
 
-    lcd.setCursor(0, 1);
-    lcd.print("ST");
-    lcd.print(sensorValue2);
+    writeSensor2Current(sensorValue2);
+    writeSensor2High(sensorTwoHigh);
+    writeSensor2Average(sensorTwoAvg);
     
-    lcd.setCursor(6, 1);
-    lcd.print(" H");
-    lcd.print(sensorTwoHigh);
     
-    lcd.setCursor(11, 1);
-    lcd.print(" A");
-    lcd.print(sensorTwoAvg);
 
     if(digitalRead(pinButton))
     {
       digitalWrite(pinLed, HIGH);
       
-      sensorOneSum = 0;
-      sensorTwoSum = 0;
-
-      sensorOneAvg = 0;
-      sensorTwoAvg = 0;
-
-      sensorOneHigh = 0;
-      sensorTwoHigh = 0;
-      
-      recordings = 0;
+      reset();
     }
     
     delay(250);
@@ -121,5 +102,56 @@ void turnOnLED()
 void turnOffLED()
 {
   digitalWrite(pinLed,LOW);
+}
+
+void reset()
+{
+  sensorOneSum = 0;
+  sensorTwoSum = 0;
+
+  sensorOneAvg = 0;
+  sensorTwoAvg = 0;
+
+  sensorOneHigh = 0;
+  sensorTwoHigh = 0;
+
+  recordings = 0;
+}
+
+void writeSensor1Current(int sensorValue)
+{
+  lcd.setCursor(0, 0);
+  lcd.print("SO");
+  lcd.print(sensorValue);
+}
+
+void writeSensor1High(int sensorOneHigh){
+  lcd.setCursor(6, 0);
+  lcd.print(" H");
+  lcd.print(sensorOneHigh);
+}
+
+void writeSensor1Average(int sensorOneAvg){
+  lcd.setCursor(11, 0);
+  lcd.print(" A");
+  lcd.print(sensorOneAvg);
+}
+
+void writeSensor2Current(int sensorValue2){
+  lcd.setCursor(0, 1);
+  lcd.print("ST");
+  lcd.print(sensorValue2);
+}
+
+void writeSensor2High(int sensorTwoHigh){
+  lcd.setCursor(6, 1);
+  lcd.print(" H");
+  lcd.print(sensorTwoHigh);
+}
+
+void writeSensor2Average(int SensorTwoAvg){
+  lcd.setCursor(11, 1);
+  lcd.print(" A");
+  lcd.print(sensorTwoAvg);
 }
 

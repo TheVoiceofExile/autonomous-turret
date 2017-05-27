@@ -1,7 +1,10 @@
 // demo of Starter Kit V2.0 - Grove Sound Sensor
 // when sound larger than a certain value, led will on
 #include <Wire.h>
+#include <Servo.h>
 #include "rgb_lcd.h"
+
+//Servo myservo;
 
 const int pinButton = 8;
 
@@ -32,8 +35,12 @@ const int colorB = 255;
 void setup()
 {
     pinMode(pinLed, OUTPUT);            //set the LED on Digital 12 as an OUTPUT
-    pinMode(pinServo, OUTPUT);
     pinMode(pinButton, INPUT);
+    //myservo.attach(A3);
+
+    //myservo.write(90);
+    
+    
     
     lcd.begin(16, 2);
     lcd.setRGB(colorR, colorG, colorB);
@@ -64,23 +71,27 @@ void loop()
     sensorOneAvg = sensorOneSum/recordings;
     sensorTwoAvg = sensorTwoSum/recordings;
 
-    if(sensorValue>thresholdValue){
+    if(sensorValue > thresholdValue){
       turnOnLED();
+      leftVRight(sensorValue, sensorValue2);
+    }
+    else if(sensorValue2 > thresholdValue)
+    {
+      turnOnLED();
+      leftVRight(sensorValue, sensorValue2);
     }
     else
     {
       turnOffLED();
     }
 
-    lcd.clear();
-
-    writeSensor1Current(sensorValue);
+    //writeSensor1Current(sensorValue);
     writeSensor1High(sensorOneHigh);
-    writeSensor1Average(sensorOneAvg);
+    //writeSensor1Average(sensorOneAvg);
 
-    writeSensor2Current(sensorValue2);
+    //writeSensor2Current(sensorValue2);
     writeSensor2High(sensorTwoHigh);
-    writeSensor2Average(sensorTwoAvg);
+    //writeSensor2Average(sensorTwoAvg);
     
     
 
@@ -91,7 +102,7 @@ void loop()
       reset();
     }
     
-    delay(250);
+    
 }
 
 void turnOnLED()
@@ -102,6 +113,44 @@ void turnOnLED()
 void turnOffLED()
 {
   digitalWrite(pinLed,LOW);
+}
+
+void leftVRight(int sensorValue, int sensorValue2)
+{
+  int greater = 0;
+  
+  if(sensorValue > sensorValue2)
+  {
+    greater = sensorValue;
+    lcd.setCursor(9, 0);
+    lcd.print("S-Left");
+  }
+  else if( sensorValue2 > sensorValue)
+  {
+    greater = sensorValue2;
+    lcd.setCursor(9, 0);
+    lcd.print("S-Right");
+  }
+
+  lcd.setCursor(9, 1);
+  lcd.print(greater);
+  delay(500);
+  lcd.clear();
+}
+
+void adjustServo(int sensorValue, int sensorValue2)
+{
+  float ratio = 0;
+  float angle = 0;
+
+  ratio = ((float)sensorValue2)/((float)sensorValue2);
+
+  angle = ratio * 90;
+
+  if(ratio < 90)
+  {
+    
+  }
 }
 
 void reset()
@@ -126,8 +175,8 @@ void writeSensor1Current(int sensorValue)
 }
 
 void writeSensor1High(int sensorOneHigh){
-  lcd.setCursor(6, 0);
-  lcd.print(" H");
+  lcd.setCursor(0, 0);
+  lcd.print("H1: ");
   lcd.print(sensorOneHigh);
 }
 
@@ -144,8 +193,8 @@ void writeSensor2Current(int sensorValue2){
 }
 
 void writeSensor2High(int sensorTwoHigh){
-  lcd.setCursor(6, 1);
-  lcd.print(" H");
+  lcd.setCursor(0, 1);
+  lcd.print("H2: ");
   lcd.print(sensorTwoHigh);
 }
 

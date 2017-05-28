@@ -4,7 +4,7 @@
 #include <Servo.h>
 #include "rgb_lcd.h"
 
-//Servo myservo;
+Servo myservo;
 
 const int pinButton = 8;                // pin of reset button (digital)
 
@@ -46,8 +46,8 @@ void setup()
     pinMode(pinButton, INPUT);          //set thee button on digital 8 is an input
     
     
-    //myservo.attach(A3);
-    //myservo.write(90);
+    //myservo.attach(9);
+    
     
     
     
@@ -62,17 +62,19 @@ void loop()
     
     //Turns on the servo (turning it to low probably turns it off and stops the jittering i might be an idiot)
     //analogWrite(pinServo, HIGH);          
-    
+    //myservo.write(90);
     //This just checks if the current sound recorded is higher than teh previous one, if so update sensorOneHigh
     if(sensorValue > sensorOneHigh)
     {
       sensorOneHigh = sensorValue;
+      writeSensor1High(sensorOneHigh);
     }
     
     //This just checks if the current sound recorded is higher than teh previous one, if so update sensorOneHigh
     if(sensorValue2 > sensorTwoHigh)
     {
       sensorTwoHigh = sensorValue2;
+      writeSensor2High(sensorTwoHigh);
     }
 
     //recordings++;             Was used in determining the average sound in a room
@@ -89,19 +91,21 @@ void loop()
     if(sensorValue > thresholdValue){           //checks if a recorded sound from mic 1 exceeds the target threshold
       turnOnLED();                              //turns on the LED indicator
       leftVRight(sensorValue, sensorValue2);    //takes the sound level from each mic and will determine which side was louder as a rudimentary directional test
+      adjustServo(sensorValue, sensorValue2);
     }
     else if(sensorValue2 > thresholdValue)      //checks if a recorded sound from mic 2 exceeds the target threshold
     {
       turnOnLED();                              //turns on the LED indicator
       leftVRight(sensorValue, sensorValue2);    //takes the sound level from each mic and will determine which side was louder as a rudimentary directional test
+      adjustServo(sensorValue, sensorValue2);
     }
     else                                        //if no sound exceeds the threshold value do something
     {   
       turnOffLED();                             //turn off LED indicator
     }
     
-    writeSensor1High(sensorOneHigh);            //Calls a function to write the highest recorded sound from sensor 2 to the lcd
-    writeSensor2High(sensorTwoHigh);            //Calls a function to write the highest recorded sound from sensor 2 to the lcd
+    //writeSensor1High(sensorOneHigh);            //Calls a function to write the highest recorded sound from sensor 2 to the lcd
+    //writeSensor2High(sensorTwoHigh);            //Calls a function to write the highest recorded sound from sensor 2 to the lcd
     
     /**
         Left over stuff from dusplaying the average and current sound level
@@ -147,10 +151,8 @@ void reset()
    * Old stuff from previous testing that isn't needed for now but might be in the future
   sensorOneSum = 0;
   sensorTwoSum = 0;
-
   sensorOneAvg = 0;
   sensorTwoAvg = 0;
-
   recordings = 0;
   */
 }
@@ -181,7 +183,10 @@ void leftVRight(int sensorValue, int sensorValue2)
   lcd.setCursor(9, 1);                          //sets the cursor to position 9 on the second row
   lcd.print(largerNumber);                      //prints whichever number was larger
   delay(500);                                   //delays the program so user can read the data - needs to be increased
-  lcd.clear();                                  //clears lcd so info doesnt stay there and get confuesd with future tests
+  lcd.setCursor(9,0);                                  //clears lcd so info doesnt stay there and get confuesd with future tests
+  lcd.print("       ");
+  lcd.setCursor(9, 1);
+  lcd.print("       ");
 }
 
 
@@ -192,18 +197,35 @@ void leftVRight(int sensorValue, int sensorValue2)
 */
 void adjustServo(int sensorValue, int sensorValue2)
 {
-  float ratio = 0;                                          //ratio of the sensor values
-  float angle = 0;                                          //angle of the servo arm
-
-  ratio = ((float)sensorValue2)/((float)sensorValue2);      //determines the ratio by taking the seonc d senso divided by the first
-
-  angle = ratio * 90;                                       //multiplies the ration by 90 to give the new angle of servo
+  float ratio = 0.0;                                          //ratio of the sensor values
+  float angle = 0.0;                                          //angle of the servo arm
+  float firstThing = 0.0;
+  float secondThing = 0.0;
   
-  //unfinished code
-  if(ratio < 90)
-  {
-    
-  }
+  lcd.clear();
+  myservo.attach(9);
+
+  lcd.setCursor(0,0);
+  lcd.print("S1: ");
+  lcd.print(sensorValue);
+  lcd.setCursor(0,1);
+  lcd.print("S2: ");
+  lcd.print(sensorValue2);
+
+  firstThing = (float)sensorValue;
+  secondThing = (float)sensorValue2;
+  
+  ratio = firstThing/secondThing;      //determines the ratio by taking the seonc d senso divided by the first
+
+  angle = (ratio * 90);                                       //multiplies the ratio by 90 to give the new angle of servo
+
+  myservo.write(angle);
+
+  lcd.setCursor(9,1);
+  lcd.print(ratio);
+  delay(500);
+  
+  myservo.detach();
 }
 
 /*
@@ -251,23 +273,19 @@ void writeSensor1Current(int sensorValue)
   lcd.print("SO");
   lcd.print(sensorValue);
 }
-
 void writeSensor1Average(int sensorOneAvg){
   lcd.setCursor(11, 0);
   lcd.print(" A");
   lcd.print(sensorOneAvg);
 }
-
 void writeSensor2Current(int sensorValue2){
   lcd.setCursor(0, 1);
   lcd.print("ST");
   lcd.print(sensorValue2);
 }
-
 void writeSensor2Average(int SensorTwoAvg){
   lcd.setCursor(11, 1);
   lcd.print(" A");
   lcd.print(sensorTwoAvg);
 }
 */
-

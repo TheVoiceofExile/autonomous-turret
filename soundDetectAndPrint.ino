@@ -7,8 +7,7 @@
 Servo myservo;
 
 const int pinButton = 8;                // pin of reset button (digital)
-
-const int pinServo = A2;                // pin of servo (analog)
+const int pinRotary = A2;
 
 const int pinSound1 = A0;               // pin of Sound Sensor 1 (analog)
 const int pinSound2 = A1;               // pin of sound sensor 2 (analog)
@@ -44,7 +43,7 @@ void setup()
 {
     pinMode(pinLed, OUTPUT);            //set the LED on Digital 12 as an OUTPUT
     pinMode(pinButton, INPUT);          //set thee button on digital 8 is an input
-    
+    pinMode(pinRotary, INPUT);
     
     //myservo.attach(9);
     //myservo.write(90);
@@ -60,6 +59,8 @@ void loop()
 {
     int sensorValue = analogRead(pinSound1);   //read the sensorValue on Analog 0
     int sensorValue2 = analogRead(pinSound2);   //read the sensorValue on Analog 1
+
+    int calibratedThreshold = thresholdValue + rotaryAdjustThreshold();
     
     //Turns on the servo (turning it to low probably turns it off and stops the jittering i might be an idiot)
     //analogWrite(pinServo, HIGH);          
@@ -77,6 +78,7 @@ void loop()
       sensorTwoHigh = sensorValue2;
       writeSensor2High(sensorTwoHigh);
     }
+    
 
     //recordings++;             Was used in determining the average sound in a room
     
@@ -89,21 +91,22 @@ void loop()
     //sensorTwoAvg = sensorTwoSum/recordings;
 
     
-    if(sensorValue > thresholdValue){           //checks if a recorded sound from mic 1 exceeds the target threshold
+    if(sensorValue > calibratedThreshold){           //checks if a recorded sound from mic 1 exceeds the target threshold
       turnOnLED();                              //turns on the LED indicator
       leftVRight(sensorValue, sensorValue2);    //takes the sound level from each mic and will determine which side was louder as a rudimentary directional test
-      //adjustServo(sensorValue, sensorValue2);
+      adjustServo(sensorValue, sensorValue2);
     }
-    else if(sensorValue2 > thresholdValue)      //checks if a recorded sound from mic 2 exceeds the target threshold
+    else if(sensorValue2 > calibratedThreshold)      //checks if a recorded sound from mic 2 exceeds the target threshold
     {
       turnOnLED();                              //turns on the LED indicator
       leftVRight(sensorValue, sensorValue2);    //takes the sound level from each mic and will determine which side was louder as a rudimentary directional test
-      //adjustServo(sensorValue, sensorValue2);
+      adjustServo(sensorValue, sensorValue2);
     }
     else                                        //if no sound exceeds the threshold value do something
     {   
       turnOffLED();                             //turn off LED indicator
     }
+    
     
     //writeSensor1High(sensorOneHigh);            //Calls a function to write the highest recorded sound from sensor 2 to the lcd
     //writeSensor2High(sensorTwoHigh);            //Calls a function to write the highest recorded sound from sensor 2 to the lcd
@@ -229,16 +232,11 @@ void adjustServo(int sensorValue, int sensorValue2)
   float secondThing = 0.0;
   
   lcd.clear();
-  digitalWrite(pinSound1, LOW);
-  digitalWrite(pinSound2, LOW);
+
   myservo.attach(9);
 
-  lcd.setCursor(0,0);
-  lcd.print("S1: ");
-  lcd.print(sensorValue);
-  lcd.setCursor(0,1);
-  lcd.print("S2: ");
-  lcd.print(sensorValue2);
+  writeSensor1Value(sensorValue);
+  writeSensor2Value(sensorValue2);
 
   ratio = (float)smallerNumber(sensorValue, sensorValue2)/(float)largerNumber(sensorValue, sensorValue2);                             //determines the ratio by taking the seonc d senso divided by the first
   
@@ -249,20 +247,26 @@ void adjustServo(int sensorValue, int sensorValue2)
 
   //myservo.write(angle);
 
-  lcd.setCursor(9, 1);
-  lcd.print(myservo.read());
+  writeServoPosition();
   
   myservo.detach();
-
-  digitalWrite(pinSound1,HIGH);
-  digitalWrite(pinSound2, HIGH);
 }
 
 /*
- *
+ * Rotary Related Functions 
+ * 
+ */
+
+int rotaryAdjustThreshold()
+{
+  
+  return map(analogRead(pinRotary), 0, 1023, 0, 300);
+}
+/*
  * LED Based Functions
- *
-*/
+ * 1. Turn on the LED
+ * 2. Turn off the LED
+ */
 //function that turns on the led
 void turnOnLED()
 {
@@ -286,11 +290,39 @@ void writeSensor1High(int sensorOneHigh){
   lcd.print("H1: ");                                //just some user info tag the information
   lcd.print(sensorOneHigh);                         //prints the int passed to the function
 }
-//function to wrute the highest recorded sound of sensor 2, takes in an int as an argument
+//function to write the highest recorded sound of sensor 2, takes in an int as an argument
 void writeSensor2High(int sensorTwoHigh){
   lcd.setCursor(0, 1);                              //sets the cursor of the lcd to the first spot of the second row
   lcd.print("H2: ");                                //just some user info top tag the information
   lcd.print(sensorTwoHigh);                         //prints the int passed to the function
+}
+//function to write the current value of sensor 1 on the lcd
+void writeSensor1Value(int sensorValue)
+{
+  lcd.setCursor(0,0);
+  lcd.print("S1: ");
+  lcd.print(sensorValue);
+}
+//function to write teh current value of senso 2 on the lcd
+void writeSensor2Value(int sensorValue2)
+{
+  lcd.setCursor(0,1);
+  lcd.print("S2: ");
+  lcd.print(sensorValue2);
+}
+//fuction to print servo position in degrees
+void writeServoPosition()
+{
+  lcd.setCursor(9, 1);
+  lcd.print(myservo.read());
+}
+
+void writeRotaryAngle()
+{
+  lcd.setCursor(0, 0);
+  lcd.print("      ");
+  lcd.setCursor(0, 0);
+  lcd.print(analogRead(pinRotary));
 }
 /*
  * Old functions that write the current sound level and average for each mic onto the lcd screen

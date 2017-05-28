@@ -46,9 +46,9 @@ void setup()
     pinMode(pinButton, INPUT);          //set thee button on digital 8 is an input
     
     
-    myservo.attach(9);
-    myservo.write(90);
-    myservo.detach();
+    //myservo.attach(9);
+    //myservo.write(90);
+    //myservo.detach();
     
     
     
@@ -65,18 +65,18 @@ void loop()
     //analogWrite(pinServo, HIGH);          
     //myservo.write(90);
     //This just checks if the current sound recorded is higher than teh previous one, if so update sensorOneHigh
-    if(sensorValue > sensorOneHigh)
-    {
-      sensorOneHigh = sensorValue;
-      writeSensor1High(sensorOneHigh);
-    }
+    //if(sensorValue > sensorOneHigh)
+    //{
+    //  sensorOneHigh = sensorValue;
+    //  writeSensor1High(sensorOneHigh);
+    //}
     
     //This just checks if the current sound recorded is higher than teh previous one, if so update sensorOneHigh
-    if(sensorValue2 > sensorTwoHigh)
-    {
-      sensorTwoHigh = sensorValue2;
-      writeSensor2High(sensorTwoHigh);
-    }
+    //if(sensorValue2 > sensorTwoHigh)
+    //{
+    //  sensorTwoHigh = sensorValue2;
+    //  writeSensor2High(sensorTwoHigh);
+    //}
 
     //recordings++;             Was used in determining the average sound in a room
     
@@ -91,14 +91,14 @@ void loop()
     
     if(sensorValue > thresholdValue){           //checks if a recorded sound from mic 1 exceeds the target threshold
       turnOnLED();                              //turns on the LED indicator
-      leftVRight(sensorValue, sensorValue2);    //takes the sound level from each mic and will determine which side was louder as a rudimentary directional test
-      adjustServo(sensorValue, sensorValue2);
+      //leftVRight(sensorValue, sensorValue2);    //takes the sound level from each mic and will determine which side was louder as a rudimentary directional test
+      //adjustServo(sensorValue, sensorValue2);
     }
     else if(sensorValue2 > thresholdValue)      //checks if a recorded sound from mic 2 exceeds the target threshold
     {
       turnOnLED();                              //turns on the LED indicator
-      leftVRight(sensorValue, sensorValue2);    //takes the sound level from each mic and will determine which side was louder as a rudimentary directional test
-      adjustServo(sensorValue, sensorValue2);
+      //leftVRight(sensorValue, sensorValue2);    //takes the sound level from each mic and will determine which side was louder as a rudimentary directional test
+      //adjustServo(sensorValue, sensorValue2);
     }
     else                                        //if no sound exceeds the threshold value do something
     {   

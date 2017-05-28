@@ -46,8 +46,9 @@ void setup()
     pinMode(pinButton, INPUT);          //set thee button on digital 8 is an input
     
     
-    //myservo.attach(9);
-    
+    myservo.attach(9);
+    myservo.write(90);
+    myservo.detach();
     
     
     
@@ -156,8 +157,33 @@ void reset()
   recordings = 0;
   */
 }
+
+int largerNumber(int numberOne, int numberTwo)
+{
+  if(numberOne>numberTwo)
+  {
+    return numberOne;
+  }
+  else
+  {
+    return numberTwo;
+  }
+}
+
+int smallerNumber(int numberOne, int numberTwo)
+{
+  if(numberOne<numberTwo)
+  {
+    return -numberOne;
+  }
+  else
+  {
+    return numberTwo;
+  }
+}
+
 /*
- * Data Related Functions
+ * Sound Related Functions
  * 1. Determines if sound was heard from the left or right of the device
 */
 
@@ -203,6 +229,8 @@ void adjustServo(int sensorValue, int sensorValue2)
   float secondThing = 0.0;
   
   lcd.clear();
+  digitalWrite(pinSound1, LOW);
+  digitalWrite(pinSound2, LOW);
   myservo.attach(9);
 
   lcd.setCursor(0,0);
@@ -212,20 +240,22 @@ void adjustServo(int sensorValue, int sensorValue2)
   lcd.print("S2: ");
   lcd.print(sensorValue2);
 
-  firstThing = (float)sensorValue;
-  secondThing = (float)sensorValue2;
+  ratio = (float)smallerNumber(sensorValue, sensorValue2)/(float)largerNumber(sensorValue, sensorValue2);                             //determines the ratio by taking the seonc d senso divided by the first
   
-  ratio = firstThing/secondThing;      //determines the ratio by taking the seonc d senso divided by the first
+  //angle = 90;
+  //+ (90*(1-ratio));
+  
+  //angle = (ratio * 90);                                       //multiplies the ratio by 90 to give the new angle of servo
 
-  angle = (ratio * 90);                                       //multiplies the ratio by 90 to give the new angle of servo
+  //myservo.write(angle);
 
-  myservo.write(angle);
-
-  lcd.setCursor(9,1);
-  lcd.print(ratio);
-  delay(500);
+  lcd.setCursor(9, 1);
+  lcd.print(myservo.read());
   
   myservo.detach();
+
+  digitalWrite(pinSound1,HIGH);
+  digitalWrite(pinSound2, HIGH);
 }
 
 /*

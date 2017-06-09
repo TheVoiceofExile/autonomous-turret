@@ -1,4 +1,4 @@
-## autoTurret :sound:
+# autoTurret :sound:
 COP 4331 group project
 
 Arduino turret that fires projectiles based on detection of sound, or manual instruction. 
@@ -6,7 +6,7 @@ Arduino turret that fires projectiles based on detection of sound, or manual ins
 [Trello Board - Sprint 1](https://trello.com/b/luyqSuYz/sprint-1)
 
 
-# Vision Statement
+## Vision Statement
 
 The auto turret provides a peace of mind to security-conscious individuals of all ages including, college dormitory students, retired individuals, also young-adults who are tired of their family members entering their private areas without permission. It accomplishes this via alerts whenever it is triggered. The auto-turret also provides a high-level of entertainment with its nerfs and witty LCD text warnings.
 

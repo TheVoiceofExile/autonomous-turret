@@ -14,25 +14,25 @@ The auto-turret will be deployed with certain abilities. The auto-turret will ac
 
 ## Backlogs :clipboard:
 ### Product Backlog
-| Sample        | Sample        | Sample|
-| ------------- |:-------------:| -----:|
-| Sample        | Sample        | Sample|
+| Feature       | User Story    | Importance  | Difficulty|
+| ------------- |:-------------:| -----:      | -----:    |
+| Sample        | Sample        | Sample      | Sample    |
 
 ### Sprint Backlogs
 #### *Sprint 1*
-| Sample        | Sample        | Sample|
-| ------------- |:-------------:| -----:|
-| Sample        | Sample        | Sample|
+| Feature       | User Story    | Importance  | Difficulty|
+| ------------- |:-------------:| -----:      | -----:    |
+| Sample        | Sample        | Sample      | Sample    |
 
 #### *Sprint 2*
-| Sample        | Sample        | Sample|
-| ------------- |:-------------:| -----:|
-| Sample        | Sample        | Sample|
+| Feature       | User Story    | Importance  | Difficulty|
+| ------------- |:-------------:| -----:      | -----:    |
+| Sample        | Sample        | Sample      | Sample    |
 
 #### *Sprint 3*
-| Sample        | Sample        | Sample|
-| ------------- |:-------------:| -----:|
-| Sample        | Sample        | Sample|
+| Feature       | User Story    | Importance  | Difficulty|
+| ------------- |:-------------:| -----:      | -----:    |
+| Sample        | Sample        | Sample      | Sample    |
 
 ## Burndown Chart :chart_with_downwards_trend:
 

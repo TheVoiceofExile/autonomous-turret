@@ -1,7 +1,6 @@
 # autoTurret
-> #### COP 4331 group project
-
-> #### Arduino turret that fires projectiles based on detection of sound, or manual instruction. 
+#### COP 4331 group project
+#### Arduino turret that fires projectiles based on detection of sound, or manual instruction. 
 
 [Trello Board - Sprint 1](https://trello.com/b/luyqSuYz/sprint-1)
 
@@ -25,19 +24,19 @@ The auto-turret will be deployed with certain abilities. The auto-turret will ac
 
 ### Sprint Backlogs
 
-#### Sprint 1
+#### *Sprint 1*
 
 | Sample        | Sample        | Sample|
 | ------------- |:-------------:| -----:|
 | Sample        | Sample        | Sample|
 
-#### Sprint 2
+#### *Sprint 2*
 
 | Sample        | Sample        | Sample|
 | ------------- |:-------------:| -----:|
 | Sample        | Sample        | Sample|
 
-#### Sprint 3
+#### *Sprint 3*
 
 | Sample        | Sample        | Sample|
 | ------------- |:-------------:| -----:|

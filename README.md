@@ -37,6 +37,3 @@ The auto-turret will be deployed with certain abilities. The auto-turret will ac
 ## Burndown Chart :chart_with_downwards_trend:
 
 ## UML Diagrams :bar_chart:
-
-## Code :computer:
-*All project code is included above.*

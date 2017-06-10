@@ -18,14 +18,19 @@ The auto-turret will be deployed with certain abilities. The auto-turret will ac
 ### [Product Backlog](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?usp=sharing)
 
 ### Sprint Backlogs
-#### [Sprint 1](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?ts=593b1dca#gid=1843836899)
+> #### [Sprint 1](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?ts=593b1dca#gid=1843836899)
 
-#### [Sprint 2](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?ts=593b1dca#gid=2128107892)
+> #### [Sprint 2](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?ts=593b1dca#gid=2128107892)
 
 
-#### [Sprint 3](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?ts=593b1dca#gid=578824550)
+> #### [Sprint 3](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?ts=593b1dca#gid=578824550)
 
 
 ## Burndown Chart :chart_with_downwards_trend:
 
 ## UML Diagrams :bar_chart:
+> [Software Diagram](https://raw.githubusercontent.com/raforero/autonomous-turret/master/Photo_Log/Assorted%20UML.jpg)
+
+> [Hardware Diagram](https://raw.githubusercontent.com/raforero/autonomous-turret/master/Photo_Log/Turret%20UML.jpg)
+
+> [Use-Case Diagram](https://raw.githubusercontent.com/raforero/autonomous-turret/master/Photo_Log/Use-Case%20Diagram.jpg)

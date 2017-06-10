@@ -1,5 +1,6 @@
 # autoTurret
 <img src="http://i.imgur.com/Xpgi1Kr.png" width=200px align="right">
+
 **COP 4331 group project**
 
 Arduino turret that fires projectiles based on detection of sound, or manual instruction.

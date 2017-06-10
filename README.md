@@ -5,7 +5,7 @@
 
 Arduino turret that displays warnings and fires projectiles based on detection of movement, and notifes owner through Twitter notifications.
 
-[Trello Board - Sprint 1](https://trello.com/b/luyqSuYz/sprint-1)
+[Trello Board](https://trello.com/b/luyqSuYz/sprint-1)
 
 ## Vision Statement :eyes:
 The auto turret provides a peace of mind to security-conscious individuals of all ages including, college dormitory students, retired individuals, also young-adults who are tired of their family members entering their private areas without permission. It accomplishes this via alerts whenever it is triggered. The auto-turret also provides a high-level of entertainment with its nerfs and witty LCD text warnings.

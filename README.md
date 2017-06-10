@@ -16,7 +16,6 @@ The auto-turret will be deployed with certain abilities. The auto-turret will ac
 
 ## Backlogs :clipboard:
 ### [Product Backlog](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?usp=sharing) 
-(Scroll Down!)
 
 ### Sprint Backlogs
 > #### [Sprint 1](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?ts=593b1dca#gid=1843836899)

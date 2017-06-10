@@ -1,5 +1,5 @@
 # autoTurret
-![alt text](autoTurret_icon.png)
+![alt text](http://i.imgur.com/Xpgi1Kr.png)
 
 **COP 4331 group project**
 

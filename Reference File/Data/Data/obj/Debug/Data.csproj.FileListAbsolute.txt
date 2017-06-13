@@ -1,0 +1,6 @@
+c:\users\brent rademaker\documents\visual studio 2015\Projects\Data\Data\bin\Debug\Data.exe.config
+c:\users\brent rademaker\documents\visual studio 2015\Projects\Data\Data\bin\Debug\Data.exe
+c:\users\brent rademaker\documents\visual studio 2015\Projects\Data\Data\bin\Debug\Data.pdb
+c:\users\brent rademaker\documents\visual studio 2015\Projects\Data\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache
+c:\users\brent rademaker\documents\visual studio 2015\Projects\Data\Data\obj\Debug\Data.exe
+c:\users\brent rademaker\documents\visual studio 2015\Projects\Data\Data\obj\Debug\Data.pdb

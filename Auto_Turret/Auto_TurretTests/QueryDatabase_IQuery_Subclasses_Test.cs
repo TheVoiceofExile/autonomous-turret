@@ -20,7 +20,7 @@ namespace Auto_TurretTests
     [TestClass]
     public class QueryDatabase_IQuery_Subclasses_Test
     {
-        
+
 
         public QueryDatabase_IQuery_Subclasses_Test()
         {
@@ -104,50 +104,82 @@ namespace Auto_TurretTests
         // public void MyTestCleanup() { }
         //
         #endregion
-
+        //
+        //Test methods for QueryDatabase_TurretEvents CombineSelectStatement() method
+        //
         [TestMethod]
         public void IQuery_QueryDatabase_TurretEvents_SelectStatementVariable_NotVoid()
-        {   
-            QueryDatabase_TurretEvents foo = new QueryDatabase_TurretEvents(columns, tables, arguments);
+        {
+            QueryDatabase_TurretEvents foo = new QueryDatabase_TurretEvents(this.columns, this.tables, this.arguments);
 
             Assert.AreNotEqual(string.Empty, foo.SelectStatement);
         }
         [TestMethod]
+        public void IQuery_QueryDatabase_TurretEvents_CombineSelectStatement_1LessCommaThanListCount_Test()
+        {
+            List<string> columns = new List<string> { "turret_name" };
+            QueryDatabase_TurretEvents foo = new QueryDatabase_TurretEvents(columns, this.tables, this.arguments);
+
+            Assert.AreEqual(false, foo.SelectStatement.Contains(","));
+        }
+        [TestMethod]
         public void IQuery_QueryDatabase_TurretEvents_CombineSelectStatement_Complete_String_Test()
         {
-            QueryDatabase_TurretEvents foo = new QueryDatabase_TurretEvents(columns, tables, arguments);
+            QueryDatabase_TurretEvents foo = new QueryDatabase_TurretEvents(this.columns, this.tables, this.arguments);
 
             Assert.AreEqual("SELECT turret_name, eventtype, eventtime", foo.SelectStatement);
         }
-
+        //
+        //Test methods for QueryDatabase_TurretEvents CombineFromStatement() method
+        //
         [TestMethod]
         public void IQuery_QueryDatabase_TurretEvents_FromStatementVariable_NotVoid()
         {
-            QueryDatabase_TurretEvents foo = new QueryDatabase_TurretEvents(columns, tables, arguments);
+            QueryDatabase_TurretEvents foo = new QueryDatabase_TurretEvents(this.columns, this.tables, this.arguments);
 
             Assert.AreNotEqual(string.Empty, foo.FromStatement);
         }
 
         [TestMethod]
-        public void IQuery_QueryDatabase_TurretEvents_CombineFromStatement_Complete_String_Test()
+        public void IQuery_QueryDatabase_TurretEvents_CombineFromStatement_1LessCommaThanListCount_Test()
         {
-            QueryDatabase_TurretEvents foo = new QueryDatabase_TurretEvents(columns, tables, arguments);
+            List<string> tables = new List<string> { "dbo.Turrets" };
+            QueryDatabase_TurretEvents foo = new QueryDatabase_TurretEvents(this.columns, tables, this.arguments);
 
-            Assert.AreEqual("FROM dbo.Turrets, dbo.Events", foo.FromStatement);
+            Assert.AreEqual(false, foo.FromStatement.Contains(","));
         }
 
         [TestMethod]
+        public void IQuery_QueryDatabase_TurretEvents_CombineFromStatement_Complete_String_Test()
+        {
+            QueryDatabase_TurretEvents foo = new QueryDatabase_TurretEvents(this.columns, this.tables, this.arguments);
+
+            Assert.AreEqual("FROM dbo.Turrets, dbo.Events", foo.FromStatement);
+        }
+        //
+        //Test methos for QueryDatabase_TurretEvents CombineWhereStatement() method
+        //
+        [TestMethod]
         public void IQuery_QueryDatabase_TurretEvents_WhereStatementVariable_Test()
         {
-            QueryDatabase_TurretEvents foo = new QueryDatabase_TurretEvents(columns, tables, arguments);
+            QueryDatabase_TurretEvents foo = new QueryDatabase_TurretEvents(this.columns, this.tables, this.arguments);
 
             Assert.AreNotEqual(string.Empty, foo.WhereStatement);
         }
 
         [TestMethod]
+        public void IQuery_QueryDatabase_TurretEvents_CombineWhereStatement_1LessCommaThankListCount_Test()
+        {
+            List<string> arguments = new List<string> { "turret_id=fk_turret_id" };
+            QueryDatabase_TurretEvents foo = new QueryDatabase_TurretEvents(this.columns, this.tables, arguments);
+
+            Assert.AreEqual(false, foo.WhereStatement.Contains(","));
+        }
+
+        [TestMethod]
         public void IQuery_QueryDatabase_TurretEvents_CombineWhereStatement_Complete_String_Test()
         {
-            QueryDatabase_TurretEvents foo = new QueryDatabase_TurretEvents(columns, tables, arguments);
+            QueryDatabase_TurretEvents foo = new QueryDatabase_TurretEvents(this.columns, this.tables, this.arguments);
 
             Assert.AreEqual("WHERE Turrets.turret_id=Events.fk_turret_id", foo.WhereStatement);
         }

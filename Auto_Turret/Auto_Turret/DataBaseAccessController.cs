@@ -38,11 +38,24 @@ namespace Auto_Turret
             {
                 connection.Open();
             }
-            catch (SqlException e)
+            catch (SqlException)
             {
                 return 0;
             }
 
+            return 1;
+        }
+
+        private int CloseConnection(SqlConnection connection)
+        {
+            try
+            {
+                connection.Close();
+            }
+            catch(SqlException)
+            {
+                return 0;
+            }
             return 1;
         }
     }

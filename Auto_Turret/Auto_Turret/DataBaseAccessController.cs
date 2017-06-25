@@ -52,7 +52,7 @@ namespace Auto_Turret
                 connection.Open();
                 Console.WriteLine("Connection opened");
             }
-            catch (SqlException)
+            catch (SqlException e)
             {
                 Console.WriteLine("Connection Failed To Open");
                 return 0;

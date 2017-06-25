@@ -12,19 +12,19 @@ namespace Auto_Turret
     {
         public List<TurretnameEventtypeEventtimeData> TurretEvents = new List<TurretnameEventtypeEventtimeData>();
         private SqlConnection connection;
-        public int ConnectToDatabase(string connectionString)
+        public void ConnectToDatabase(string connectionString)
         {
             connection = new SqlConnection(connectionString);
             int response=1;
             OpenConnection();
+            if (connection.State == System.Data.ConnectionState.Open)
+            {
+                string statement = GetQueryString();
 
-            string statement = GetQueryString();
-
-            SqlDataReader reader = ExecuteQuery(connection, statement);
-            InterpretSqlReader(reader);
+                SqlDataReader reader = ExecuteQuery(connection, statement);
+                InterpretSqlReader(reader);
+            }
             CloseConnection();
-
-            return response;
         }
 
         public string GetDatabaseString()
@@ -47,6 +47,7 @@ namespace Auto_Turret
 
         private void OpenConnection()
         {
+
             try
             {
                 connection.Open();
@@ -55,20 +56,21 @@ namespace Auto_Turret
             catch (SqlException e)
             {
                 Console.WriteLine("Connection Failed To Open: " + e.ToString());
+                throw;
             }
         }
 
-        private int CloseConnection()
+        private void CloseConnection()
         {
             try
             {
                 connection.Close();
             }
-            catch(SqlException)
+            catch(SqlException e)
             {
-                return 0;
+                Console.WriteLine("Connection Failed to close" + e.ToString());
+                throw;
             }
-            return 1;
         }
 
         private SqlDataReader ExecuteQuery(SqlConnection connection, string statement)

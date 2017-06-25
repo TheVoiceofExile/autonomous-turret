@@ -18,11 +18,10 @@ namespace Auto_Turret.Tests
         public void ConnectToDatabase_Test_Failed_Connection()
         {
             DataBaseAccessController dbac = new DataBaseAccessController();
+
             dbac.ConnectToDatabase("Server = tcp:softdev.database.windows.net,1433; Initial Catalog = AutoTurret; "
                       + "Persist Security Info = False; User ID = ironicism; Password =unknown88;"
                       + "MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
-
-            
 
         }
 

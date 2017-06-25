@@ -29,8 +29,9 @@ namespace Auto_Turret.Tests
         public void ConnectToDatabase_Test_Successful_Connection()
         {
             DataBaseAccessController dbac = new DataBaseAccessController();
+            dbac.ConnectToDatabase(dbac.GetDatabaseString());
 
-            Assert.AreEqual(dbac.ConnectToDatabase(dbac.GetDatabaseString()), 1);
+            Assert.AreEqual(true, dbac.IsConnectionOpen());
         }
 
         [TestMethod]

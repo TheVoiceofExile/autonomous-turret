@@ -15,9 +15,9 @@ namespace Auto_Turret
         public void ConnectToDatabase(string connectionString)
         {
             connection = new SqlConnection(connectionString);
-            int response=1;
+
             OpenConnection();
-            if (connection.State == System.Data.ConnectionState.Open)
+            if (IsConnectionOpen())
             {
                 string statement = GetQueryString();
 
@@ -101,6 +101,18 @@ namespace Auto_Turret
             while(reader.Read())
             {
                 TurretEvents.Add(new TurretnameEventtypeEventtimeData(reader.GetString(0), reader.GetString(1), reader.GetDateTime(2)));
+            }
+        }
+
+        public bool IsConnectionOpen()
+        {
+            if(connection.State == System.Data.ConnectionState.Open)
+            {
+                return true;   
+            }
+            else
+            {
+                return false;
             }
         }
     }

@@ -30,7 +30,7 @@ namespace Auto_Turret
         public string GetDatabaseString()
         {
             return "Server = tcp:softdev.database.windows.net,1433; Initial Catalog = AutoTurret;"
-                     + "Persist Security Info = False; User ID = ironicism1; Password =Unknown8*;"
+                     + "Persist Security Info = False; User ID = ironicism; Password =Unknown8*;"
                      + "MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;";
         }
 
@@ -80,9 +80,18 @@ namespace Auto_Turret
             command.CommandType = System.Data.CommandType.Text;
             command.Connection = connection;
 
-            reader = command.ExecuteReader();
+            try
+            {
+                reader = command.ExecuteReader();
+                return reader;
+            }
+            catch(InvalidOperationException e)
+            {
+                Debug.WriteLine("Reader Requires Open Connection, Error is: " + e);
+            }
 
-            return reader;
+            return null;
+
         }
 
         private void InterpretSqlReader(SqlDataReader reader)

@@ -22,6 +22,8 @@ namespace Auto_Turret.Tests
                       + "Persist Security Info = False; User ID = ironicism; Password =unknown88;"
                       + "MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
 
+            
+
         }
 
         [TestMethod]

@@ -15,13 +15,13 @@ namespace Auto_Turret
         {
             connection = new SqlConnection(connectionString);
             int response=1;
-            OpenConnection(connection);
+            OpenConnection();
 
             string statement = GetQueryString();
 
             SqlDataReader reader = ExecuteQuery(connection, statement);
             InterpretSqlReader(reader);
-            CloseConnection(connection);
+            CloseConnection();
 
             return response;
         }
@@ -44,7 +44,7 @@ namespace Auto_Turret
             return statement.BuildQueryString();
         }
 
-        private void OpenConnection(SqlConnection connection)
+        private void OpenConnection()
         {
             try
             {
@@ -57,7 +57,7 @@ namespace Auto_Turret
             }
         }
 
-        private int CloseConnection(SqlConnection connection)
+        private int CloseConnection()
         {
             try
             {

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auto_Turret", "Auto_Turret\Auto_Turret.csproj", "{F1D99B5A-A69B-4CF8-9A4D-071139FB6164}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auto_TurretTests", "Auto_TurretTests\Auto_TurretTests.csproj", "{9BD22F8F-B2D4-4050-9A90-895E83AFE7F0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1D99B5A-A69B-4CF8-9A4D-071139FB6164}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1D99B5A-A69B-4CF8-9A4D-071139FB6164}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1D99B5A-A69B-4CF8-9A4D-071139FB6164}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1D99B5A-A69B-4CF8-9A4D-071139FB6164}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BD22F8F-B2D4-4050-9A90-895E83AFE7F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BD22F8F-B2D4-4050-9A90-895E83AFE7F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BD22F8F-B2D4-4050-9A90-895E83AFE7F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BD22F8F-B2D4-4050-9A90-895E83AFE7F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

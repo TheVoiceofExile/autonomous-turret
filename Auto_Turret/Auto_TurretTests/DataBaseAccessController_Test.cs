@@ -14,15 +14,14 @@ namespace Auto_Turret.Tests
     public class DataBaseAccessController_Test
     {
         [TestMethod]
+        [ExpectedException(typeof(SqlException), "Failed To Open Database Connection")]
         public void ConnectToDatabase_Test_Failed_Connection()
         {
             DataBaseAccessController dbac = new DataBaseAccessController();
-            int response = dbac.ConnectToDatabase("Server = tcp:softdev.database.windows.net,1433; Initial Catalog = AutoTurret; "
-                      + "Persist Security Info = False; User ID = ironicism; Password =Unknown88;"
+            dbac.ConnectToDatabase("Server = tcp:softdev.database.windows.net,1433; Initial Catalog = AutoTurret; "
+                      + "Persist Security Info = False; User ID = ironicism; Password =unknown88;"
                       + "MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
 
-
-            Assert.AreEqual(0, response);
         }
 
         [TestMethod]

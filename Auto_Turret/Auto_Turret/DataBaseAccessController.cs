@@ -10,27 +10,26 @@ namespace Auto_Turret
     public class DataBaseAccessController
     {
         public List<TurretnameEventtypeEventtimeData> TurretEvents = new List<TurretnameEventtypeEventtimeData>();
-
+        private SqlConnection connection;
         public int ConnectToDatabase(string connectionString)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                int response = OpenConnection(connection);
+            connection = new SqlConnection(connectionString);
+            int response=1;
+            OpenConnection(connection);
 
-                string statement = GetQueryString();
+            string statement = GetQueryString();
 
-                SqlDataReader reader = ExecuteQuery(connection, statement);
-                InterpretSqlReader(reader);
-                CloseConnection(connection);
-                
-                return response;
-            }
+            SqlDataReader reader = ExecuteQuery(connection, statement);
+            InterpretSqlReader(reader);
+            CloseConnection(connection);
+
+            return response;
         }
 
         public string GetDatabaseString()
         {
             return "Server = tcp:softdev.database.windows.net,1433; Initial Catalog = AutoTurret;"
-                     + "Persist Security Info = False; User ID = ironicism; Password =Unknown8*;"
+                     + "Persist Security Info = False; User ID = ironicism1; Password =Unknown8*;"
                      + "MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;";
         }
 
@@ -45,7 +44,7 @@ namespace Auto_Turret
             return statement.BuildQueryString();
         }
 
-        private int OpenConnection(SqlConnection connection)
+        private void OpenConnection(SqlConnection connection)
         {
             try
             {
@@ -54,11 +53,8 @@ namespace Auto_Turret
             }
             catch (SqlException e)
             {
-                Console.WriteLine("Connection Failed To Open");
-                return 0;
+                Console.WriteLine("Connection Failed To Open: " + e.ToString());
             }
-
-            return 1;
         }
 
         private int CloseConnection(SqlConnection connection)

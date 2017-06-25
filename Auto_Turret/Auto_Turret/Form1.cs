@@ -25,9 +25,7 @@ namespace Auto_Turret
         private void GetData_Button_Click(object sender, EventArgs e)
         {
             DataBaseAccessController controller = new DataBaseAccessController();
-            controller.ConnectToDatabase("Server = tcp:softdev.database.windows.net,1433; Initial Catalog = AutoTurret;"
-                     + "Persist Security Info = False; User ID = ironicism; Password =Unknown8*;"
-                     + "MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
+            controller.ConnectToDatabase(controller.GetDatabaseString());
             List<TurretnameEventtypeEventtimeData> databaseResults = controller.TurretEvents;
             AddToListView(databaseResults);
         }

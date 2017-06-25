@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace Auto_Turret
 {
@@ -49,7 +50,7 @@ namespace Auto_Turret
             try
             {
                 connection.Open();
-                Console.WriteLine("Connection opened");
+                Debug.WriteLine("Connection opened");
             }
             catch (SqlException e)
             {

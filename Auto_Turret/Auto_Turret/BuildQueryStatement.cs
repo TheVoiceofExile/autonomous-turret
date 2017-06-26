@@ -22,7 +22,7 @@ namespace Auto_Turret
         public string BuildQueryString()
         {
             string QueryStatement = SelectStatement + " " + FromStatement + " " + WhereStatement;
-
+            Console.WriteLine(QueryStatement);
             return QueryStatement;
         }
 
@@ -70,7 +70,7 @@ namespace Auto_Turret
             {
                 WhereStatement += arguments[i];
                 if (i < arguments.Count - 1)
-                    WhereStatement += "AND ";
+                    WhereStatement += " AND ";
             }
         }
     }

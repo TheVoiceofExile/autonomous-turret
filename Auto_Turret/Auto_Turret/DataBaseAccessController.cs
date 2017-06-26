@@ -44,11 +44,17 @@ namespace Auto_Turret
             List<string> select = new List<string> { "turret_name", "eventtype", "eventtime" };
             List<string> from = new List<string> { "dbo.Turrets", "dbo.Events" };
             List<string> where = new List<string> { "Turrets.turret_id=Events.fk_turret_id" };
-
-            for(int i=0; i< additionalArgs.Count; i++)
+            
+            if (additionalArgs[0] == additionalArgs[1])
             {
-                where.Add(additionalArgs[i]);
+                where.Add("Events.eventtime >= " + "Convert(datetime, '" + additionalArgs[0] + "')");
             }
+            else
+            {
+                where.Add("Events.eventtime >= " + "Convert(datetime, '" + additionalArgs[0] + "')");
+                where.Add("Events.eventtime <= " + "Convert(datetime, '" + additionalArgs[1] + "')");
+            }
+
             BuildQueryStatement statement = new BuildQueryStatement(select, from, where);
 
             return statement.BuildQueryString();
@@ -74,6 +80,7 @@ namespace Auto_Turret
             try
             {
                 connection.Close();
+                Debug.WriteLine("Connection closed");
             }
             catch(SqlException e)
             {

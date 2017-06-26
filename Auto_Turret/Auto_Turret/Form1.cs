@@ -24,7 +24,9 @@ namespace Auto_Turret
 
         private void GetData_Button_Click(object sender, EventArgs e)
         {
+            
             List<string> dates = new List<string>();
+
             using (CreateSummary createSummary = new CreateSummary())
             {
                 var result = createSummary.ShowDialog();
@@ -32,12 +34,13 @@ namespace Auto_Turret
                 if (createSummary.DialogResult ==DialogResult.OK)
                 {
                     dates = createSummary.Dates;
+                    DataBaseAccessController controller = new DataBaseAccessController(dates);
+                    controller.ConnectToDatabase(controller.GetDatabaseString());
+                    List<TurretnameEventtypeEventtimeData> databaseResults = controller.TurretEvents;
+                    AddToListView(databaseResults);
                 }
+            
             }
-            DataBaseAccessController controller = new DataBaseAccessController(dates);
-            controller.ConnectToDatabase(controller.GetDatabaseString());
-            List<TurretnameEventtypeEventtimeData> databaseResults = controller.TurretEvents;
-            AddToListView(databaseResults);
         }
 
         private void Clear_Button_Click(object sender, EventArgs e)

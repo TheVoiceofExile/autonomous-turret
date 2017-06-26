@@ -41,6 +41,7 @@
             this.FromDate.Name = "FromDate";
             this.FromDate.Size = new System.Drawing.Size(200, 20);
             this.FromDate.TabIndex = 0;
+            this.FromDate.Value = new System.DateTime(2017, 6, 25, 21, 3, 50, 0);
             this.FromDate.ValueChanged += new System.EventHandler(this.FromDate_ValueChanged);
             // 
             // ToDate
@@ -49,6 +50,7 @@
             this.ToDate.Name = "ToDate";
             this.ToDate.Size = new System.Drawing.Size(200, 20);
             this.ToDate.TabIndex = 1;
+            this.ToDate.Value = new System.DateTime(2017, 6, 25, 21, 1, 58, 0);
             this.ToDate.ValueChanged += new System.EventHandler(this.ToDate_ValueChanged);
             // 
             // FromLabel

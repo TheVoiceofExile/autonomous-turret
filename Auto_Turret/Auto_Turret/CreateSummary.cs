@@ -16,18 +16,14 @@ namespace Auto_Turret
         public CreateSummary()
         {
             InitializeComponent();
-            FromDate.Value = DateTime.Today;
-            ToDate.Value = DateTime.Today;
-
+            
         }
 
         private void CreateSummary_Load(object sender, EventArgs e)
         {
-            Dates.Add(ToDate.ToString());
-            Dates.Add(ToDate.ToString());
-
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            FromDate.Value = DateTime.Today.AddDays(0);
+            ToDate.Value = DateTime.Today.AddDays(0);
+            Dates = new List<string>();
         }
 
         private void FromDate_ValueChanged(object sender, EventArgs e)
@@ -42,7 +38,11 @@ namespace Auto_Turret
 
         private void CreateSummaryButton_Click(object sender, EventArgs e)
         {
+            Dates.Add(FromDate.Value.ToString("yyyy-MM-dd"));
+            Dates.Add(ToDate.Value.ToString("yyyy-MM-dd"));
 
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

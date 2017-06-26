@@ -9,6 +9,7 @@
   "author": "Rafael Forero",
   "license": "ISC",
   "dependencies": {
+    "mocha": "^3.4.2",
     "twit": "^2.2.9"
   }
 }

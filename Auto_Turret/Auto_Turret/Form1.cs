@@ -24,7 +24,17 @@ namespace Auto_Turret
 
         private void GetData_Button_Click(object sender, EventArgs e)
         {
-            DataBaseAccessController controller = new DataBaseAccessController();
+            List<string> dates = new List<string>();
+            using (CreateSummary createSummary = new CreateSummary())
+            {
+                var result = createSummary.ShowDialog();
+
+                if (createSummary.DialogResult ==DialogResult.OK)
+                {
+                    dates = createSummary.Dates;
+                }
+            }
+            DataBaseAccessController controller = new DataBaseAccessController(dates);
             controller.ConnectToDatabase(controller.GetDatabaseString());
             List<TurretnameEventtypeEventtimeData> databaseResults = controller.TurretEvents;
             AddToListView(databaseResults);

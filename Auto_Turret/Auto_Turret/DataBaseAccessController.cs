@@ -12,6 +12,11 @@ namespace Auto_Turret
     {
         public List<TurretnameEventtypeEventtimeData> TurretEvents = new List<TurretnameEventtypeEventtimeData>();
         private SqlConnection connection;
+        List<string> additionalArgs;
+        public DataBaseAccessController(List<string> additionalArgs)
+        {
+            this.additionalArgs = additionalArgs;
+        }
         public void ConnectToDatabase(string connectionString)
         {
             connection = new SqlConnection(connectionString);
@@ -40,6 +45,10 @@ namespace Auto_Turret
             List<string> from = new List<string> { "dbo.Turrets", "dbo.Events" };
             List<string> where = new List<string> { "Turrets.turret_id=Events.fk_turret_id" };
 
+            for(int i=0; i< additionalArgs.Count; i++)
+            {
+                where.Add(additionalArgs[i]);
+            }
             BuildQueryStatement statement = new BuildQueryStatement(select, from, where);
 
             return statement.BuildQueryString();

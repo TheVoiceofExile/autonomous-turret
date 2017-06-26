@@ -70,7 +70,7 @@ namespace Auto_Turret
             {
                 WhereStatement += arguments[i];
                 if (i < arguments.Count - 1)
-                    WhereStatement += ", ";
+                    WhereStatement += "AND ";
             }
         }
     }

@@ -17,7 +17,8 @@ namespace Auto_Turret.Tests
         [ExpectedException(typeof(SqlException), "Failed To Open Database Connection")]
         public void ConnectToDatabase_Test_Failed_Connection()
         {
-            DataBaseAccessController dbac = new DataBaseAccessController();
+            List<string> foo = new List<string>();
+            DataBaseAccessController dbac = new DataBaseAccessController(foo);
 
             dbac.ConnectToDatabase("Server = tcp:softdev.database.windows.net,1433; Initial Catalog = AutoTurret; "
                       + "Persist Security Info = False; User ID = ironicism; Password =unknown88;"
@@ -28,7 +29,8 @@ namespace Auto_Turret.Tests
         [TestMethod]
         public void ConnectToDatabase_Test_Successful_Connection()
         {
-            DataBaseAccessController dbac = new DataBaseAccessController();
+            List<string> foo = new List<string>();
+            DataBaseAccessController dbac = new DataBaseAccessController(foo);
             dbac.ConnectToDatabase(dbac.GetDatabaseString());
 
             Assert.AreEqual(true, dbac.IsConnectionOpen());
@@ -37,7 +39,8 @@ namespace Auto_Turret.Tests
         [TestMethod]
         public void GetDatabaseString_Test()
         {
-            DataBaseAccessController dbac = new DataBaseAccessController();
+            List<string> foo = new List<string>();
+            DataBaseAccessController dbac = new DataBaseAccessController(foo);
 
             StringAssert.Contains(dbac.GetDatabaseString(), "Server = tcp:softdev.database.windows.net,1433; Initial Catalog = AutoTurret;"
                     + "Persist Security Info = False; User ID = ironicism; Password =Unknown8*;"
@@ -47,7 +50,8 @@ namespace Auto_Turret.Tests
         [TestMethod]
         public void GetQueryString()
         {
-            DataBaseAccessController dbac = new DataBaseAccessController();
+            List<string> foo = new List<string>();
+            DataBaseAccessController dbac = new DataBaseAccessController(foo);
 
             Assert.AreEqual("SELECT turret_name, eventtype, eventtime FROM dbo.Turrets, dbo.Events WHERE Turrets.turret_id=Events.fk_turret_id", dbac.GetQueryString());
         }

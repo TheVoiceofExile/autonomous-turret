@@ -22,3 +22,4 @@ C:\Users\Brent Rademaker\Documents\GitHub\autonomous-turret\Auto_Turret\Auto_Tur
 C:\Users\Brent Rademaker\Documents\GitHub\autonomous-turret\Auto_Turret\Auto_Turret\obj\Debug\Auto_Turret.Auto_Turret_Main_Page.resources
 C:\Users\Brent Rademaker\Documents\GitHub\autonomous-turret\Auto_Turret\Auto_Turret\obj\Debug\Auto_Turret.Properties.Resources.resources
 C:\Users\Brent Rademaker\Documents\GitHub\autonomous-turret\Auto_Turret\Auto_Turret\obj\Debug\Auto_Turret.csproj.GenerateResource.Cache
+C:\Users\Brent Rademaker\Documents\GitHub\autonomous-turret\Auto_Turret\Auto_Turret\obj\Debug\Auto_Turret.CreateSummary.resources

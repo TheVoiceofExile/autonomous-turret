@@ -16,7 +16,7 @@ T.post(
         user_id: '2889985308', // @ra_forero
         text: 'test message',
     }, 
-    function(err, data, response) {
+    function (err, data, response) {
         console.log('Message sent.');
     }
 );
@@ -26,7 +26,7 @@ T.post(
         user_id: '879129222618513408', // @ brent_rademaker
         text: 'test message',
     }, 
-    function(err, data, response) {
+    function (err, data, response) {
         console.log('Message sent.');
     }
 );

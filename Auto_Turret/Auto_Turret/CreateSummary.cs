@@ -38,6 +38,7 @@ namespace Auto_Turret
 
         private void CreateSummaryButton_Click(object sender, EventArgs e)
         {
+            ToDate.Value.AddDays(1);
             Dates.Add(FromDate.Value.ToString("yyyy-MM-dd"));
             Dates.Add(ToDate.Value.ToString("yyyy-MM-dd"));
 

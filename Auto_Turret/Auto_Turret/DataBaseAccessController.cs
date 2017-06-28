@@ -52,7 +52,7 @@ namespace Auto_Turret
             else
             {
                 where.Add("Events.eventtime >= " + "Convert(datetime, '" + additionalArgs[0] + "')");
-                where.Add("Events.eventtime <= " + "Convert(datetime, '" + additionalArgs[1] + "')");
+                where.Add("Events.eventtime < " + "Convert(datetime, '" + additionalArgs[1] + "')");
             }
 
             BuildQueryStatement statement = new BuildQueryStatement(select, from, where);

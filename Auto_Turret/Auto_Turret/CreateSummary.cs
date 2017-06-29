@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Diagnostics;
 namespace Auto_Turret
 {
     public partial class CreateSummary : Form
@@ -38,10 +38,10 @@ namespace Auto_Turret
 
         private void CreateSummaryButton_Click(object sender, EventArgs e)
         {
-            ToDate.Value.AddDays(1);
+            ToDate.Value = ToDate.Value.AddDays(1);
             Dates.Add(FromDate.Value.ToString("yyyy-MM-dd"));
             Dates.Add(ToDate.Value.ToString("yyyy-MM-dd"));
-
+            Debug.WriteLine(ToDate.Value);
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

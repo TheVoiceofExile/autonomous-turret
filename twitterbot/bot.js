@@ -14,9 +14,9 @@ const T = new Twit({
 T.post(
     'direct_messages/new', {
         user_id: '2889985308', // @ra_forero
-        text: 'test message',
+        text: 'HELLO I AM BOT.',
     }, 
-    function(err, data, response) {
+    function (err, data, response) {
         console.log('Message sent.');
     }
 );
@@ -24,9 +24,19 @@ T.post(
 T.post(
     'direct_messages/new', {
         user_id: '879129222618513408', // @ brent_rademaker
-        text: 'test message',
+        text: 'Hi Brent, this is Bot. This is a test message.',
     }, 
-    function(err, data, response) {
+    function (err, data, response) {
+        console.log('Message sent.');
+    }
+);
+
+T.post(
+    'direct_messages/new', {
+        user_id: '3622865902', // @ billy_bil88
+        text: 'Hi Billy, this is Bot. This is a test message.',
+    }, 
+    function (err, data, response) {
         console.log('Message sent.');
     }
 );

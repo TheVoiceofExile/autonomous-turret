@@ -37,5 +37,5 @@ The auto-turret will be deployed with certain abilities. The auto-turret will ac
 
 > [Use-Case Diagram](https://raw.githubusercontent.com/raforero/autonomous-turret/master/Photo_Log/Use-Case%20Diagram.jpg)
 
-##Expense Report
-> [Expense Report] (https://docs.google.com/spreadsheets/d/1CcWzhmxmHYezIC98jgXHLFN2w0XMIJUq4YqEYpALn0Q/edit?usp=sharing)
+## Expense Report
+> [Expense Report](https://docs.google.com/spreadsheets/d/1CcWzhmxmHYezIC98jgXHLFN2w0XMIJUq4YqEYpALn0Q/edit?usp=sharing)

@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "mocha": "^3.4.2",
+    "node-emoji": "^1.5.1",
     "twit": "^2.2.9"
   }
 }

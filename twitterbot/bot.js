@@ -1,4 +1,5 @@
 const Twit = require('twit');
+const emoji = require('node-emoji');
 
 console.log("BOT ACTIVATED.");
 
@@ -9,34 +10,48 @@ const T = new Twit({
     access_token_secret: 'tH4KDsmoXJgXZSURkHoaeNOu1JbsiGQajyCiclUeKn2y4',
 });
 
-// TODO: Query database
+/*
+ * TODO: Query database
+ * 
+ * 
+ */
 
 T.post(
     'direct_messages/new', {
         user_id: '2889985308', // @ra_forero
-        text: 'HELLO I AM BOT.',
+        text: emoji.emojify('Hello I am Bot :hand: :robot_face:'),
     }, 
     function (err, data, response) {
-        console.log('Message sent.');
+        console.log('Message sent to @ra_forero.');
     }
 );
 
 T.post(
     'direct_messages/new', {
-        user_id: '879129222618513408', // @ brent_rademaker
-        text: 'Hi Brent, this is Bot. This is a test message.',
+        user_id: '879129222618513408', // @brent_rademaker
+        text: emoji.emojify('Hello I am Bot :hand: :robot_face:'),
     }, 
     function (err, data, response) {
-        console.log('Message sent.');
+        console.log('Message sent to @brent_rademaker.');
     }
 );
 
 T.post(
     'direct_messages/new', {
-        user_id: '3622865902', // @ billy_bil88
-        text: 'Hi Billy, this is Bot. This is a test message.',
+        user_id: '3622865902', // @billy_bil88
+        text: emoji.emojify('Hello I am Bot :hand: :robot_face:'),
     }, 
     function (err, data, response) {
-        console.log('Message sent.');
+        console.log('Message sent to @billy_bil88.');
+    }
+);
+
+T.post(
+    'direct_messages/new', {
+        user_id: '883285308', // @megamatt119
+        text: emoji.emojify('Hello I am Bot :hand: :robot_face:'),
+    }, 
+    function (err, data, response) {
+        console.log('Message sent to @megamatt119.');
     }
 );

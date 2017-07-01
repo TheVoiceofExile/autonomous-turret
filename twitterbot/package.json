@@ -4,11 +4,12 @@
   "description": "Twitterbot for Autonomous Turret class project.",
   "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha || true"
   },
   "author": "Rafael Forero",
   "license": "ISC",
   "dependencies": {
+    "chai": "^4.0.2",
     "mocha": "^3.4.2",
     "node-emoji": "^1.5.1",
     "twit": "^2.2.9"

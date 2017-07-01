@@ -47,5 +47,6 @@ The auto-turret will be deployed with certain abilities. The auto-turret will ac
 
 > #### [Sprint 2](https://drive.google.com/drive/folders/0B_K0lYAFjuCgOGpHcUMzZXVzTm8)
 
-## Expense Report :moneybag:
-> #### [Expense Report](https://docs.google.com/spreadsheets/d/1CcWzhmxmHYezIC98jgXHLFN2w0XMIJUq4YqEYpALn0Q/edit?usp=sharing)
+## Other
+> #### [Expense Report](https://docs.google.com/spreadsheets/d/1CcWzhmxmHYezIC98jgXHLFN2w0XMIJUq4YqEYpALn0Q/edit?usp=sharing) :moneybag:
+> #### [Sprint 2 Retrospective](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit#gid=2140145514)

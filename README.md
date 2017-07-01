@@ -39,6 +39,7 @@ The auto-turret will be deployed with certain abilities. The auto-turret will ac
 
 ## Photo Log :camera:
 > ### [Sprint 1](https://drive.google.com/drive/folders/0B_K0lYAFjuCgelZNa2JibEVWbjg)
+
 > ### [Sprint 2](https://drive.google.com/drive/folders/0B_K0lYAFjuCgOGpHcUMzZXVzTm8)
 
 ## Expense Report

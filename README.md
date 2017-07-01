@@ -18,11 +18,11 @@ The auto-turret will be deployed with certain abilities. The auto-turret will ac
 > #### [Product Backlog](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?usp=sharing) 
 
 ### Sprint Backlogs
-* #### [Sprint 1](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?ts=593b1dca#gid=1843836899)
+> #### [Sprint 1](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?ts=593b1dca#gid=1843836899)
 
-* #### [Sprint 2](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?ts=593b1dca#gid=2128107892)
+> #### [Sprint 2](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?ts=593b1dca#gid=2128107892)
 
-* #### [Sprint 3](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?ts=593b1dca#gid=578824550)
+> #### [Sprint 3](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?ts=593b1dca#gid=578824550)
 
 ## Burndown Chart :chart_with_downwards_trend:
 > #### [Product Burndown Chart](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?usp=sharing)
@@ -30,15 +30,15 @@ The auto-turret will be deployed with certain abilities. The auto-turret will ac
 ## UML Diagrams :bar_chart:
 :warning: *These are temporary pictures. Finalized diagrams will be created in later sprints.*
 
-* #### [Software Diagram](https://raw.githubusercontent.com/raforero/autonomous-turret/master/Photo_Log/Assorted%20UML.jpg)
+> #### [Software Diagram](https://raw.githubusercontent.com/raforero/autonomous-turret/master/Photo_Log/Assorted%20UML.jpg)
 
-* #### [Hardware Diagram](https://raw.githubusercontent.com/raforero/autonomous-turret/master/Photo_Log/Turret%20UML.jpg)
+> #### [Hardware Diagram](https://raw.githubusercontent.com/raforero/autonomous-turret/master/Photo_Log/Turret%20UML.jpg)
 
-* #### [Use-Case Diagram](https://raw.githubusercontent.com/raforero/autonomous-turret/master/Photo_Log/Use-Case%20Diagram.jpg)
+> #### [Use-Case Diagram](https://raw.githubusercontent.com/raforero/autonomous-turret/master/Photo_Log/Use-Case%20Diagram.jpg)
 
 ## Code :computer:
 > #### [Desktop App](https://github.com/raforero/autonomous-turret/tree/master/Auto_Turret/Auto_Turret)
-> * [Unit Tests](https://github.com/raforero/autonomous-turret/tree/master/Auto_Turret/Auto_TurretTests)
+> [Unit Tests](https://github.com/raforero/autonomous-turret/tree/master/Auto_Turret/Auto_TurretTests)
 
 > #### [Twitterbot](https://github.com/raforero/autonomous-turret/tree/master/twitterbot)
 

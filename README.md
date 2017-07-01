@@ -24,7 +24,6 @@ The auto-turret will be deployed with certain abilities. The auto-turret will ac
 
 > #### [Sprint 3](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?ts=593b1dca#gid=578824550)
 
-
 ## Burndown Chart :chart_with_downwards_trend:
 > ### [Product Burndown Chart](https://docs.google.com/spreadsheets/d/1wluYYgCOdaX1pvJ_lkLELNqbrbs4exp3XYB5FKDbiwQ/edit?usp=sharing)
 
@@ -36,6 +35,12 @@ The auto-turret will be deployed with certain abilities. The auto-turret will ac
 > [Hardware Diagram](https://raw.githubusercontent.com/raforero/autonomous-turret/master/Photo_Log/Turret%20UML.jpg)
 
 > [Use-Case Diagram](https://raw.githubusercontent.com/raforero/autonomous-turret/master/Photo_Log/Use-Case%20Diagram.jpg)
+
+## Code :computer:
+> ### [Desktop App](https://github.com/raforero/autonomous-turret/tree/master/Auto_Turret/Auto_Turret)
+> #### [Unit Tests](https://github.com/raforero/autonomous-turret/tree/master/Auto_Turret/Auto_TurretTests)
+
+> ### [Twitterbot](https://github.com/raforero/autonomous-turret/tree/master/twitterbot)
 
 ## Photo Log :camera:
 > #### [Sprint 1](https://drive.google.com/drive/folders/0B_K0lYAFjuCgelZNa2JibEVWbjg)

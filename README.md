@@ -38,7 +38,6 @@ The auto-turret will be deployed with certain abilities. The auto-turret will ac
 
 ## Code :computer:
 > #### [Desktop App](https://github.com/raforero/autonomous-turret/tree/master/Auto_Turret/Auto_Turret)
-
 > [Unit Tests](https://github.com/raforero/autonomous-turret/tree/master/Auto_Turret/Auto_TurretTests)
 
 > #### [Twitterbot](https://github.com/raforero/autonomous-turret/tree/master/twitterbot)
@@ -49,4 +48,4 @@ The auto-turret will be deployed with certain abilities. The auto-turret will ac
 > #### [Sprint 2](https://drive.google.com/drive/folders/0B_K0lYAFjuCgOGpHcUMzZXVzTm8)
 
 ## Expense Report :moneybag:
-> [Expense Report](https://docs.google.com/spreadsheets/d/1CcWzhmxmHYezIC98jgXHLFN2w0XMIJUq4YqEYpALn0Q/edit?usp=sharing)
+> #### [Expense Report](https://docs.google.com/spreadsheets/d/1CcWzhmxmHYezIC98jgXHLFN2w0XMIJUq4YqEYpALn0Q/edit?usp=sharing)

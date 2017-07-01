@@ -30,11 +30,11 @@ The auto-turret will be deployed with certain abilities. The auto-turret will ac
 ## UML Diagrams :bar_chart:
 :warning: *These are temporary pictures. Finalized diagrams will be created in later sprints.*
 
-> [Software Diagram](https://raw.githubusercontent.com/raforero/autonomous-turret/master/Photo_Log/Assorted%20UML.jpg)
+> #### [Software Diagram](https://raw.githubusercontent.com/raforero/autonomous-turret/master/Photo_Log/Assorted%20UML.jpg)
 
-> [Hardware Diagram](https://raw.githubusercontent.com/raforero/autonomous-turret/master/Photo_Log/Turret%20UML.jpg)
+> #### [Hardware Diagram](https://raw.githubusercontent.com/raforero/autonomous-turret/master/Photo_Log/Turret%20UML.jpg)
 
-> [Use-Case Diagram](https://raw.githubusercontent.com/raforero/autonomous-turret/master/Photo_Log/Use-Case%20Diagram.jpg)
+> #### [Use-Case Diagram](https://raw.githubusercontent.com/raforero/autonomous-turret/master/Photo_Log/Use-Case%20Diagram.jpg)
 
 ## Code :computer:
 > #### [Desktop App](https://github.com/raforero/autonomous-turret/tree/master/Auto_Turret/Auto_Turret)

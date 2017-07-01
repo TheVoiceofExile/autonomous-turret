@@ -5,6 +5,6 @@ const bot = require('../bot');
 
 describe('bot', function () {
     it('should <do something>', function () {
-        // Test statement (assertion)
+        // TODO: Add test statements (assertion)
     });
 });

@@ -47,10 +47,11 @@ The auto-turret will be deployed with certain abilities. The auto-turret will ac
 
 > #### [Sprint 2](https://drive.google.com/drive/folders/0B_K0lYAFjuCgOGpHcUMzZXVzTm8)
 
-##Videos
+## Videos
 > #### Sprint 2
 >>###### [Twitter Bot](https://drive.google.com/file/d/0B943z9Iq2MKweWtXN2F5ZzdMd3c/view?usp=sharing)
->>###### 
+>>###### [360 Servo](https://drive.google.com/file/d/0B9WRbCgekDU7RzdIa3FlWm5FMzA/view?usp=sharing)
+>>###### [Computer App](https://drive.google.com/file/d/0B9WRbCgekDU7ZUxEdi1UcWxBaG8/view?usp=sharing)
 
 ## Other
 > #### [Expense Report](https://docs.google.com/spreadsheets/d/1CcWzhmxmHYezIC98jgXHLFN2w0XMIJUq4YqEYpALn0Q/edit?usp=sharing) :moneybag:

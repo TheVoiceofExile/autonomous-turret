@@ -1,8 +1,45 @@
 const Twit = require('twit');
 const emoji = require('node-emoji');
+const Connection = require('tedious').Connection;
+const Request = require('tedious').Request;
 
 console.log("BOT ACTIVATED.");
 
+/*
+ * CONNECT TO AZURE DATABASE
+ */
+const config = {
+    userName: 'ironicism',
+    password: 'Unknown8*',
+    server: 'softdev.database.windows.net',
+    options: {
+        port: 1433,
+        encrypt: true,
+        database: 'AutoTurret',
+    }
+}
+
+const connection = new Connection(config);
+
+connection.on('connect', function (err) {
+    if (err) {
+        console.log(err);
+    } else {
+        queryDatabase();
+        // Format data
+        // Post Twitter dm
+    }
+});
+
+/*
+ * TODO: QUERY DATA
+ * - queryDatabase();
+ * 
+ */
+
+/*
+ * CONNECT TO TWITTER API
+ */
 const T = new Twit({
     consumer_key: 'BLMFmhRGVSbimKjFcvhKj28jL',
     consumer_secret: 'FWmV1rRWWIGBnrzfNQ2Uz2zRsJVTl73HGPD8qGdlxHb7nE6FLt',
@@ -11,12 +48,9 @@ const T = new Twit({
 });
 
 /*
- * TODO: Query database
- * 
- * 
+ * POST DIRECT MESSAGE
  */
-
-T.post(
+/*T.post(
     'direct_messages/new', {
         user_id: '2889985308', // @ra_forero
         text: emoji.emojify('Hello I am Bot :hand: :robot_face:'),
@@ -54,4 +88,4 @@ T.post(
     function (err, data, response) {
         console.log('Message sent to @megamatt119.');
     }
-);
+);*/

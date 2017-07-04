@@ -26,15 +26,6 @@ namespace Auto_Turret.Tests
 
         }
 
-        [TestMethod]
-        public void ConnectToDatabase_Test_Successful_Connection()
-        {
-            List<string> foo = new List<string>();
-            DataBaseAccessController dbac = new DataBaseAccessController(foo);
-            dbac.ConnectToDatabase(dbac.GetDatabaseString());
-
-            Assert.AreEqual(true, dbac.IsConnectionOpen());
-        }
 
         [TestMethod]
         public void GetDatabaseString_Test()
@@ -51,9 +42,10 @@ namespace Auto_Turret.Tests
         public void GetQueryString()
         {
             List<string> foo = new List<string>();
+
             DataBaseAccessController dbac = new DataBaseAccessController(foo);
 
-            Assert.AreEqual("SELECT turret_name, eventtype, eventtime FROM dbo.Turrets, dbo.Events WHERE Turrets.turret_id=Events.fk_turret_id", dbac.GetQueryString());
+            StringAssert.Contains(dbac.GetQueryString(), "SELECT turret_name, eventtype, eventtime FROM dbo.Turrets, dbo.Events WHERE Turrets.turret_id=Events.fk_turret_id");
         }
     }
 }

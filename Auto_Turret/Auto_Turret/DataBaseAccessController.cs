@@ -11,7 +11,7 @@ namespace Auto_Turret
     public class DataBaseAccessController
     {
         public List<TurretnameEventtypeEventtimeData> TurretEvents = new List<TurretnameEventtypeEventtimeData>();
-        private SqlConnection connection;
+
         List<string> additionalArgs;
         public DataBaseAccessController(List<string> additionalArgs)
         {
@@ -19,17 +19,18 @@ namespace Auto_Turret
         }
         public void ConnectToDatabase(string connectionString)
         {
-            connection = new SqlConnection(connectionString);
-
-            OpenConnection();
-            if (IsConnectionOpen())
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string statement = GetQueryString();
+                OpenConnection(connection);
+                if (IsConnectionOpen(connection))
+                {
+                    string statement = GetQueryString();
 
-                SqlDataReader reader = ExecuteQuery(connection, statement);
-                InterpretSqlReader(reader);
+                    SqlDataReader reader = ExecuteQuery(connection, statement);
+                    InterpretSqlReader(reader);
+                }
+                CloseConnection(connection);
             }
-            CloseConnection();
         }
 
         public string GetDatabaseString()
@@ -44,8 +45,11 @@ namespace Auto_Turret
             List<string> select = new List<string> { "turret_name", "eventtype", "eventtime" };
             List<string> from = new List<string> { "dbo.Turrets", "dbo.Events" };
             List<string> where = new List<string> { "Turrets.turret_id=Events.fk_turret_id" };
-            
-            if (additionalArgs[0] == additionalArgs[1])
+            if(additionalArgs.Count == 0)
+            {
+
+            }
+            else if (additionalArgs[0] == additionalArgs[1])
             {
                 where.Add("Events.eventtime >= " + "Convert(datetime, '" + additionalArgs[0] + "')");
             }
@@ -60,7 +64,7 @@ namespace Auto_Turret
             return statement.BuildQueryString();
         }
 
-        private void OpenConnection()
+        private void OpenConnection(SqlConnection connection)
         {
 
             try
@@ -70,12 +74,12 @@ namespace Auto_Turret
             }
             catch (SqlException e)
             {
-                Console.WriteLine("Connection Failed To Open: " + e.ToString());
+                Debug.WriteLine("Connection Failed To Open: " + e.ToString());
                 throw;
             }
         }
 
-        private void CloseConnection()
+        private void CloseConnection(SqlConnection connection)
         {
             try
             {
@@ -84,7 +88,7 @@ namespace Auto_Turret
             }
             catch(SqlException e)
             {
-                Console.WriteLine("Connection Failed to close" + e.ToString());
+                Debug.WriteLine("Connection Failed to close" + e.ToString());
                 throw;
             }
         }
@@ -120,7 +124,7 @@ namespace Auto_Turret
             }
         }
 
-        public bool IsConnectionOpen()
+        private bool IsConnectionOpen(SqlConnection connection)
         {
             if(connection.State == System.Data.ConnectionState.Open)
             {

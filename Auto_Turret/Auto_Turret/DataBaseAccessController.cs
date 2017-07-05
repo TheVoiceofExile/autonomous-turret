@@ -33,13 +33,48 @@ namespace Auto_Turret
             }
         }
 
-        public string GetDatabaseString()
+        private void OpenConnection(SqlConnection connection)
         {
-            return "Server = tcp:softdev.database.windows.net,1433; Initial Catalog = AutoTurret;"
-                     + "Persist Security Info = False; User ID = ironicism; Password =Unknown8*;"
-                     + "MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;";
+
+            try
+            {
+                connection.Open();
+                Debug.WriteLine("Connection opened");
+            }
+            catch (SqlException e)
+            {
+                Debug.WriteLine("Connection Failed To Open: " + e.ToString());
+                throw;
+            }
         }
 
+        private bool IsConnectionOpen(SqlConnection connection)
+        {
+            if (connection.State == System.Data.ConnectionState.Open)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+
+        private void CloseConnection(SqlConnection connection)
+        {
+            try
+            {
+                connection.Close();
+                Debug.WriteLine("Connection closed");
+            }
+            catch (SqlException e)
+            {
+                Debug.WriteLine("Connection Failed to close" + e.ToString());
+                throw;
+            }
+        }
         public string GetQueryString()
         {
             List<string> select = new List<string> { "turret_name", "eventtype", "eventtime" };
@@ -64,51 +99,6 @@ namespace Auto_Turret
             return statement.BuildQueryString();
         }
 
-        private void OpenConnection(SqlConnection connection)
-        {
-
-            try
-            {
-                connection.Open();
-                Debug.WriteLine("Connection opened");
-            }
-            catch (SqlException e)
-            {
-                Debug.WriteLine("Connection Failed To Open: " + e.ToString());
-                throw;
-            }
-        }
-
-        private void CloseConnection(SqlConnection connection)
-        {
-            try
-            {
-                connection.Close();
-                Debug.WriteLine("Connection closed");
-            }
-            catch(SqlException e)
-            {
-                Debug.WriteLine("Connection Failed to close" + e.ToString());
-                throw;
-            }
-        }
-
-        private SqlDataReader ExecuteCommandAndReturnReader(SqlCommand command)
-        {
-            SqlDataReader reader;
-
-            try
-            {
-                reader = command.ExecuteReader();
-                return reader;
-            }
-            catch(InvalidOperationException e)
-            {
-                Debug.WriteLine("Reader Requires Open Connection, Error is: " + e);
-                return null;
-            }
-        }
-
         private SqlCommand ConfigureCommand(SqlConnection connection, string statement)
         {
             SqlCommand command = new SqlCommand(statement, connection);
@@ -120,24 +110,39 @@ namespace Auto_Turret
             return command;
         }
 
+        private SqlDataReader ExecuteCommandAndReturnReader(SqlCommand command)
+        {
+            SqlDataReader reader;
+
+            try
+            {
+                reader = command.ExecuteReader();
+                return reader;
+            }
+            catch (InvalidOperationException e)
+            {
+                Debug.WriteLine("Reader Requires Open Connection, Error is: " + e);
+                return null;
+            }
+        }
+
         private void InterpretSqlReader(SqlDataReader reader)
         {
-            while(reader.Read())
+            while (reader.Read())
             {
                 TurretEvents.Add(new TurretnameEventtypeEventtimeData(reader.GetString(0), reader.GetString(1), reader.GetDateTime(2)));
             }
         }
 
-        private bool IsConnectionOpen(SqlConnection connection)
+        
+
+        
+
+        public string GetDatabaseString()
         {
-            if(connection.State == System.Data.ConnectionState.Open)
-            {
-                return true;   
-            }
-            else
-            {
-                return false;
-            }
+            return "Server = tcp:softdev.database.windows.net,1433; Initial Catalog = AutoTurret;"
+                     + "Persist Security Info = False; User ID = ironicism; Password =Unknown8*;"
+                     + "MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;";
         }
     }
 }

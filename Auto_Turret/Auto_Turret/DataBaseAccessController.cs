@@ -45,13 +45,6 @@ namespace Auto_Turret
             }
         }
 
-        public void QueryDatabaseAndInterpretResults(SqlConnection connection)
-        {
-            string statement = GetQueryString();
-            SqlCommand command = ConfigureCommand(connection, statement);
-            SqlDataReader reader = ExecuteCommandAndReturnReader(command);
-            InterpretSqlReader(reader);
-        }
 
         private bool IsConnectionOpen(SqlConnection connection)
         {
@@ -65,6 +58,13 @@ namespace Auto_Turret
             }
         }
 
+        public void QueryDatabaseAndInterpretResults(SqlConnection connection)
+        {
+            string statement = GetQueryString();
+            SqlCommand command = ConfigureCommand(connection, statement);
+            SqlDataReader reader = ExecuteCommandAndReturnReader(command);
+            InterpretSqlReader(reader);
+        }
 
 
         private void CloseConnection(SqlConnection connection)

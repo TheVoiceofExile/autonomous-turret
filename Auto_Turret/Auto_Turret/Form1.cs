@@ -35,7 +35,7 @@ namespace Auto_Turret
                 {
                     dates = createSummary.Dates;
                     DataBaseAccessController controller = new DataBaseAccessController(dates);
-                    controller.ConnectToDatabase(controller.GetDatabaseString());
+                    controller.PullFromDatabase(controller.GetDatabaseString());
                     List<TurretnameEventtypeEventtimeData> databaseResults = controller.TurretEvents;
                     AddToListView(databaseResults);
                 }

@@ -48,6 +48,8 @@ namespace Auto_Turret
             }
         }
 
+
+
         private bool IsConnectionOpen(SqlConnection connection)
         {
             if (connection.State == System.Data.ConnectionState.Open)

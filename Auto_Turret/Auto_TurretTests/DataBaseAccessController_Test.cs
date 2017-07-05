@@ -20,7 +20,7 @@ namespace Auto_Turret.Tests
             List<string> foo = new List<string>();
             DataBaseAccessController dbac = new DataBaseAccessController(foo);
 
-            dbac.ConnectToDatabase("Server = tcp:softdev.database.windows.net,1433; Initial Catalog = AutoTurret; "
+            dbac.PullFromDatabase("Server = tcp:softdev.database.windows.net,1433; Initial Catalog = AutoTurret; "
                       + "Persist Security Info = False; User ID = ironicism; Password =unknown88;"
                       + "MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
 

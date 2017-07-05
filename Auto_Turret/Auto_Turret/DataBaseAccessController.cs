@@ -25,8 +25,8 @@ namespace Auto_Turret
                 if (IsConnectionOpen(connection))
                 {
                     string statement = GetQueryString();
-
-                    SqlDataReader reader = ExecuteQuery(connection, statement);
+                    SqlCommand command = ConfigureCommand(connection, statement);
+                    SqlDataReader reader = ExecuteQuery(command);
                     InterpretSqlReader(reader);
                 }
                 CloseConnection(connection);
@@ -93,14 +93,9 @@ namespace Auto_Turret
             }
         }
 
-        private SqlDataReader ExecuteQuery(SqlConnection connection, string statement)
+        private SqlDataReader ExecuteQuery(SqlCommand command)
         {
-            SqlCommand command = new SqlCommand(statement, connection);
             SqlDataReader reader;
-
-            command.CommandText = statement;
-            command.CommandType = System.Data.CommandType.Text;
-            command.Connection = connection;
 
             try
             {
@@ -110,10 +105,19 @@ namespace Auto_Turret
             catch(InvalidOperationException e)
             {
                 Debug.WriteLine("Reader Requires Open Connection, Error is: " + e);
+                return null;
             }
+        }
 
-            return null;
+        private SqlCommand ConfigureCommand(SqlConnection connection, string statement)
+        {
+            SqlCommand command = new SqlCommand(statement, connection);
 
+            command.CommandText = statement;
+            command.CommandType = System.Data.CommandType.Text;
+            command.Connection = connection;
+
+            return command;
         }
 
         private void InterpretSqlReader(SqlDataReader reader)

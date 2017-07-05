@@ -26,7 +26,7 @@ namespace Auto_Turret
                 {
                     string statement = GetQueryString();
                     SqlCommand command = ConfigureCommand(connection, statement);
-                    SqlDataReader reader = ExecuteQuery(command);
+                    SqlDataReader reader = ExecuteCommandAndReturnReader(command);
                     InterpretSqlReader(reader);
                 }
                 CloseConnection(connection);
@@ -93,7 +93,7 @@ namespace Auto_Turret
             }
         }
 
-        private SqlDataReader ExecuteQuery(SqlCommand command)
+        private SqlDataReader ExecuteCommandAndReturnReader(SqlCommand command)
         {
             SqlDataReader reader;
 

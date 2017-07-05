@@ -85,19 +85,7 @@ namespace Auto_Turret
             List<string> select = new List<string> { "turret_name", "eventtype", "eventtime" };
             List<string> from = new List<string> { "dbo.Turrets", "dbo.Events" };
             List<string> where = new List<string> { "Turrets.turret_id=Events.fk_turret_id" };
-            if(additionalArgs.Count == 0)
-            {
-
-            }
-            else if (additionalArgs[0] == additionalArgs[1])
-            {
-                where.Add("Events.eventtime >= " + "Convert(datetime, '" + additionalArgs[0] + "')");
-            }
-            else
-            {
-                where.Add("Events.eventtime >= " + "Convert(datetime, '" + additionalArgs[0] + "')");
-                where.Add("Events.eventtime < " + "Convert(datetime, '" + additionalArgs[1] + "')");
-            }
+            
 
             BuildQueryStatement statement = new BuildQueryStatement(select, from, where);
 
@@ -139,7 +127,45 @@ namespace Auto_Turret
             }
         }
 
-        
+        private List<string> ConfigureAdditionalArguments(List<string> where)
+        {
+            if (AreAdditionalArgsTheSame())
+            {
+                where = IfAdditionalArgsAreSame(where);
+            }
+            else if (AreAdditionalArgsTheSame())
+            {
+                where = IfAdditionalArgsAreDifferent(where);
+            }
+
+            return where;
+        }
+
+        private bool AreAdditionalArgsTheSame()
+        {
+            if(additionalArgs[0] == additionalArgs[1])
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private List<string> IfAdditionalArgsAreSame(List<string> where)
+        {
+            where.Add( "Events.eventtime >= " + "Convert(datetime, '" + additionalArgs[0] + "')");
+            return where;
+        }
+
+        private List<string> IfAdditionalArgsAreDifferent(List<string> where)
+        {
+            where.Add("Events.eventtime >= " + "Convert(datetime, '" + additionalArgs[0] + "')");
+            where.Add("Events.eventtime < " + "Convert(datetime, '" + additionalArgs[1] + "')");
+
+            return where;
+        }
 
         
 

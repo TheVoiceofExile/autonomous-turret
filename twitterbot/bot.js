@@ -3,7 +3,7 @@ const emoji = require('node-emoji');
 const Connection = require('tedious').Connection;
 const Request = require('tedious').Request;
 
-console.log("BOT ACTIVATED.");
+console.log('BOT ACTIVATED.');
 
 /*
  * CONNECT TO AZURE DATABASE
@@ -25,7 +25,8 @@ connection.on('connect', function (err) {
     if (err) {
         console.log(err);
     } else {
-        queryDatabase();
+        console.log('Connected to database.');
+        // queryDatabase();
         // Format data
         // Post Twitter dm
     }

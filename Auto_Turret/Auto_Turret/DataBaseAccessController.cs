@@ -17,7 +17,7 @@ namespace Auto_Turret
         {
             this.additionalArgs = additionalArgs;
         }
-        public void ConnectToDatabase(string connectionString)
+        public void PullFromDatabase(string connectionString)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

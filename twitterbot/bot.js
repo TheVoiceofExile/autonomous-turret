@@ -26,17 +26,43 @@ connection.on('connect', function (err) {
         console.log(err);
     } else {
         console.log('Connected to database.');
-        // queryDatabase();
+        queryDatabase();
         // Format data
         // Post Twitter dm
     }
 });
 
 /*
- * TODO: QUERY DATA
- * - queryDatabase();
- * 
+ * QUERY DATA
  */
+function queryDatabase() { 
+    console.log('Reading rows from the Table...');
+
+    // Read all rows from table
+    request = new Request(
+        // Number of events a turret has
+        "SELECT COUNT(*) " + 
+        "FROM dbo.Turrets, dbo.Events " + 
+        "WHERE Turrets.turret_id=Events.fk_turret_id ",
+ 
+        function(err, rowCount, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(rowCount + ' row(s) returned');
+                process.exit();
+            }
+        }
+    );
+
+    request.on('row', function (columns) {
+        columns.forEach(function (column) {
+                console.log("%s\t%s", column.metadata.colName, column.value);
+        });
+    });
+
+    connection.execSql(request);
+}
 
 /*
  * CONNECT TO TWITTER API

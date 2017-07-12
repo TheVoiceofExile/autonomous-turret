@@ -167,8 +167,6 @@ namespace Auto_Turret
             return where;
         }
 
-        
-
         public string GetDatabaseString()
         {
             return "Server = tcp:softdev.database.windows.net,1433; Initial Catalog = AutoTurret;"

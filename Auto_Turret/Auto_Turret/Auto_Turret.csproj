@@ -71,6 +71,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BuildQueryStatement.cs" />
+    <Compile Include="SearchParametersData.cs" />
     <Compile Include="TurretnameEventtypeEventtimeData.cs" />
     <EmbeddedResource Include="CreateSummary.resx">
       <DependentUpon>CreateSummary.cs</DependentUpon>

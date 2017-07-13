@@ -9,8 +9,10 @@ console.log('BOT ACTIVATED.');
  * CONNECT TO AZURE DATABASE
  */
 const config = {
-    userName: 'rafero',
-    password: 'Rafpass8*',
+    /*userName: 'rafero',
+    password: 'Rafpass8*',*/
+    userName: 'ironicism',
+    password: 'Unknown8*',
     server: 'softdev.database.windows.net',
     options: {
         port: 1433,

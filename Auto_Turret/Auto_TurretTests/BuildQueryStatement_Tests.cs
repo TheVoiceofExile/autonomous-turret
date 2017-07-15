@@ -212,18 +212,31 @@ namespace Auto_TurretTests
         public void IQuery_BuildQueryStatement_CombineWhereStatement_AddFromDateToWhereStatement_Test()
         {
             this.SearchParameters.FromDate = "2017-15-7";
-            this.SearchParameters.ToDate = "2017-15-7";
+            this.SearchParameters.ToDate = "2017-16-7";
             this.SearchParameters.SearchFireEvents = true;
             this.SearchParameters.SearchWarnings = true;
 
             BuildQueryStatement foo = new BuildQueryStatement(this.columns, this.tables, this.SearchParameters);
 
-            string actual = "Events.eventtime >= " + "Convert(datetime, '2017-15-7') AND ";
+            string subString = "Events.eventtime >= " + "Convert(datetime, '2017-15-7') AND ";
 
-            StringAssert.Contains(foo.WhereStatement, actual);
+            StringAssert.Contains(foo.WhereStatement, subString);
         }
 
-        
+        [TestMethod]
+        public void IQuery_BuildQuieryStatement_CombineWhereStatement_AddToDateToWhereStatement_Test()
+        {
+            this.SearchParameters.FromDate = "2017-15-7";
+            this.SearchParameters.ToDate = "2017-16-7";
+            this.SearchParameters.SearchFireEvents = true;
+            this.SearchParameters.SearchWarnings = false;
+
+            BuildQueryStatement foo = new BuildQueryStatement(this.columns, this.tables, this.SearchParameters);
+
+            string subString = "Events.eventtime < " + "Convert(datetime, '2017-16-7') AND ";
+
+            StringAssert.Contains(foo.WhereStatement, subString);
+        }
 
         [TestMethod]
         public void IQuery_BuildQueryStatement_CombineWhereStatement_Complete_String_Test()

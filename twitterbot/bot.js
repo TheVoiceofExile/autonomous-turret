@@ -1,7 +1,7 @@
 const Twit = require('twit');
-const emoji = require('node-emoji');
 const Connection = require('tedious').Connection;
 const Request = require('tedious').Request;
+const emoji = require('node-emoji');
 
 console.log('BOT ACTIVATED.');
 

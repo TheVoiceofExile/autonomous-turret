@@ -3,14 +3,14 @@ const emoji = require('node-emoji');
 const Connection = require('tedious').Connection;
 const Request = require('tedious').Request;
 
-console.log("BOT ACTIVATED.");
+console.log('BOT ACTIVATED.');
 
 /*
  * CONNECT TO AZURE DATABASE
  */
 const config = {
-    userName: 'ironicism',
-    password: 'Unknown8*',
+    userName: 'TwitterLogin',
+    password: 'Twitterbot8*',
     server: 'softdev.database.windows.net',
     options: {
         port: 1433,
@@ -25,6 +25,7 @@ connection.on('connect', function (err) {
     if (err) {
         console.log(err);
     } else {
+        console.log('Connected to database.');
         queryDatabase();
         // Format data
         // Post Twitter dm
@@ -32,10 +33,36 @@ connection.on('connect', function (err) {
 });
 
 /*
- * TODO: QUERY DATA
- * - queryDatabase();
- * 
+ * QUERY DATA
  */
+function queryDatabase() { 
+    console.log('Reading rows from the Table...');
+
+    // Read all rows from table
+    request = new Request(
+        // Number of events a turret has
+        "SELECT COUNT(*) " + 
+        "FROM dbo.Turrets, dbo.Events " + 
+        "WHERE Turrets.turret_id=Events.fk_turret_id ",
+ 
+        function(err, rowCount, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(rowCount + ' row(s) returned');
+                process.exit();
+            }
+        }
+    );
+
+    request.on('row', function (columns) {
+        columns.forEach(function (column) {
+                console.log("%s\t%s", column.metadata.colName, column.value);
+        });
+    });
+
+    connection.execSql(request);
+}
 
 /*
  * CONNECT TO TWITTER API

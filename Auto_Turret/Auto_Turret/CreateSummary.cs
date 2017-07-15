@@ -41,9 +41,21 @@ namespace Auto_Turret
             ToDate.Value = ToDate.Value.AddDays(1);
             SearchParameters.FromDate = FromDate.Value.ToString("yyyy-MM-dd");
             SearchParameters.ToDate =  ToDate.Value.ToString("yyyy-MM-dd");
+            SearchParameters.SearchFireEvents = FireEventsCheckBox.Checked;
+            SearchParameters.SearchWarnings = WarningEventsCheckBox.Checked;
             Debug.WriteLine(ToDate.Value);
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void FireEventsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void WarningEventsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

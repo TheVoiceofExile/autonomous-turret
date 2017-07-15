@@ -2,6 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Text.RegularExpressions;
 
 using Auto_Turret;
 using Moq;
@@ -66,7 +67,7 @@ namespace Auto_TurretTests
 
         List<string> columns = new List<string> { "turret_name", "eventtype", "eventtime" };
         List<string> tables = new List<string> { "dbo.Turrets", "dbo.Events" };
-        List<string> arguments = new List<string> { "Turrets.turret_id=Events.fk_turret_id" };
+        SearchParametersData SearchParameters = new SearchParametersData();
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
@@ -108,24 +109,28 @@ namespace Auto_TurretTests
         //Test methods for BuildQueryStatement CombineSelectStatement() method
         //
         [TestMethod]
-        public void IQuery_BuildQueryStatement_SelectStatementVariable_NotVoid()
-        {
-            BuildQueryStatement foo = new BuildQueryStatement(this.columns, this.tables, this.arguments);
-
-            Assert.AreNotEqual(string.Empty, foo.SelectStatement);
-        }
-        [TestMethod]
         public void IQuery_BuildQueryStatement_TurretEvents_CombineSelectStatement_1LessCommaThanListCount_Test()
         {
+            this.SearchParameters.FromDate = "";
+            this.SearchParameters.ToDate = "";
+            this.SearchParameters.SearchFireEvents = true;
+            this.SearchParameters.SearchWarnings = true;
+
             List<string> columns = new List<string> { "turret_name" };
-            BuildQueryStatement foo = new BuildQueryStatement(columns, this.tables, this.arguments);
+            BuildQueryStatement foo = new BuildQueryStatement(columns, this.tables, this.SearchParameters);
 
             Assert.AreEqual(false, foo.SelectStatement.Contains(","));
         }
+
         [TestMethod]
         public void IQuery_BuildQueryStatement_TurretEvents_CombineSelectStatement_Complete_String_Test()
         {
-            BuildQueryStatement foo = new BuildQueryStatement(this.columns, this.tables, this.arguments);
+            this.SearchParameters.FromDate = "";
+            this.SearchParameters.ToDate = "";
+            this.SearchParameters.SearchFireEvents = true;
+            this.SearchParameters.SearchWarnings = true;
+
+            BuildQueryStatement foo = new BuildQueryStatement(this.columns, this.tables, this.SearchParameters);
 
             Assert.AreEqual("SELECT turret_name, eventtype, eventtime", foo.SelectStatement);
         }
@@ -135,7 +140,12 @@ namespace Auto_TurretTests
         [TestMethod]
         public void IQuery_BuildQueryStatement_TurretEvents_FromStatementVariable_NotVoid()
         {
-            BuildQueryStatement foo = new BuildQueryStatement(this.columns, this.tables, this.arguments);
+            this.SearchParameters.FromDate = "";
+            this.SearchParameters.ToDate = "";
+            this.SearchParameters.SearchFireEvents = true;
+            this.SearchParameters.SearchWarnings = true;
+
+            BuildQueryStatement foo = new BuildQueryStatement(this.columns, this.tables, this.SearchParameters);
 
             Assert.AreNotEqual(string.Empty, foo.FromStatement);
         }
@@ -143,8 +153,14 @@ namespace Auto_TurretTests
         [TestMethod]
         public void IQuery_BuildQueryStatement_TurretEvents_CombineFromStatement_1LessCommaThanListCount_Test()
         {
+            this.SearchParameters.FromDate = "";
+            this.SearchParameters.ToDate = "";
+            this.SearchParameters.SearchFireEvents = true;
+            this.SearchParameters.SearchWarnings = true;
+
             List<string> tables = new List<string> { "dbo.Turrets" };
-            BuildQueryStatement foo = new BuildQueryStatement(this.columns, tables, this.arguments);
+            BuildQueryStatement foo = new BuildQueryStatement(this.columns, tables, this.SearchParameters);
+
 
             Assert.AreEqual(false, foo.FromStatement.Contains(","));
         }
@@ -152,7 +168,12 @@ namespace Auto_TurretTests
         [TestMethod]
         public void IQuery_BuildQueryStatement_TurretEvents_CombineFromStatement_Complete_String_Test()
         {
-            BuildQueryStatement foo = new BuildQueryStatement(this.columns, this.tables, this.arguments);
+            this.SearchParameters.FromDate = "";
+            this.SearchParameters.ToDate = "";
+            this.SearchParameters.SearchFireEvents = true;
+            this.SearchParameters.SearchWarnings = true;
+
+            BuildQueryStatement foo = new BuildQueryStatement(this.columns, this.tables, this.SearchParameters);
 
             Assert.AreEqual("FROM dbo.Turrets, dbo.Events", foo.FromStatement);
         }
@@ -160,38 +181,31 @@ namespace Auto_TurretTests
         //Test methods for BuildQueryStatement CombineWhereStatement() method
         //
         [TestMethod]
-        public void IQuery_BuildQueryStatement_IfZeroArguments_WhereStatementIsNull_Test()
-        {
-            List<string> arguments = new List<string>();
-            BuildQueryStatement foo = new BuildQueryStatement(this.columns, this.tables, arguments);
-            string emptyString = string.Empty;
-
-            Assert.AreEqual(emptyString, foo.WhereStatement);
-        }
-
-        public void IQuery_BuildQueryStatement_CheckWhichWhereStatement_IfArgumentsCountZero_Test()
-        {
-            BuildQueryStatement foo = new BuildQueryStatement(this.columns, this.tables, this.arguments);
-            string emptyString = string.Empty;
-
-            Assert.AreNotEqual(emptyString, foo.WhereStatement);
-        }
-
-        [TestMethod]
         public void IQuery_BuildQueryStatement_CombineWhereStatement_1LessCommaThankListCount_Test()
         {
-            List<string> arguments = new List<string> { "turret_id=fk_turret_id" };
-            BuildQueryStatement foo = new BuildQueryStatement(this.columns, this.tables, arguments);
+            this.SearchParameters.FromDate = "";
+            this.SearchParameters.ToDate = "";
+            this.SearchParameters.SearchFireEvents = true;
+            this.SearchParameters.SearchWarnings = true;
 
-            Assert.AreEqual(false, foo.WhereStatement.Contains(","));
+            BuildQueryStatement foo = new BuildQueryStatement(this.columns, this.tables, this.SearchParameters);
+
+            int count = Regex.Matches(foo.WhereStatement, "AND").Count;
+
+            Assert.AreEqual(2, count);
         }
 
         [TestMethod]
         public void IQuery_BuildQueryStatement_CombineWhereStatement_Complete_String_Test()
         {
-            BuildQueryStatement foo = new BuildQueryStatement(this.columns, this.tables, this.arguments);
+            this.SearchParameters.FromDate = "2017-15-7";
+            this.SearchParameters.ToDate = "2017-15-7";
+            this.SearchParameters.SearchFireEvents = true;
+            this.SearchParameters.SearchWarnings = true;
 
-            Assert.AreEqual("WHERE Turrets.turret_id=Events.fk_turret_id", foo.WhereStatement);
+            BuildQueryStatement foo = new BuildQueryStatement(this.columns, this.tables, this.SearchParameters);
+            string actual = "WHERE Turrets.turret_id=Events.fk_turret_id AND " + "Events.eventtime >= " + "Convert(datetime, '2017-15-7') AND Events.eventtime < " + "Convert(datetime, '2017-15-7')";
+            Assert.AreEqual(actual, foo.WhereStatement);
         }
         //
         // Tests methods for BuildQueryStatement BuildQueryStatement() method
@@ -199,8 +213,13 @@ namespace Auto_TurretTests
         [TestMethod]
         public void IQuery_BuildQueryStatement_BuildQueryString_ReturnsFullStatement()
         {
-            BuildQueryStatement foo = new BuildQueryStatement(this.columns, this.tables, this.arguments);
-            string actual = "SELECT turret_name, eventtype, eventtime FROM dbo.Turrets, dbo.Events WHERE Turrets.turret_id=Events.fk_turret_id";
+            this.SearchParameters.FromDate = "2017-15-7";
+            this.SearchParameters.ToDate = "2017-15-7";
+            this.SearchParameters.SearchFireEvents = true;
+            this.SearchParameters.SearchWarnings = true;
+
+            BuildQueryStatement foo = new BuildQueryStatement(this.columns, this.tables, this.SearchParameters);
+            string actual = "SELECT turret_name, eventtype, eventtime FROM dbo.Turrets, dbo.Events WHERE Turrets.turret_id=Events.fk_turret_id AND " + "Events.eventtime >= " + "Convert(datetime, '2017-15-7') AND Events.eventtime < " + "Convert(datetime, '2017-15-7')";
 
             Assert.AreEqual(actual, foo.BuildQueryString());
 

@@ -13,12 +13,18 @@ namespace Auto_Turret.Tests
     [TestClass()]
     public class DataBaseAccessController_Test
     {
+        SearchParametersData SearchParameters = new SearchParametersData();
+
         [TestMethod]
         [ExpectedException(typeof(SqlException), "Failed To Open Database Connection")]
         public void ConnectToDatabase_Test_Failed_Connection()
         {
-            List<string> foo = new List<string>();
-            DataBaseAccessController dbac = new DataBaseAccessController(foo);
+            this.SearchParameters.FromDate = "2017-15-7";
+            this.SearchParameters.ToDate = "2017-15-7";
+            this.SearchParameters.SearchFireEvents = true;
+            this.SearchParameters.SearchWarnings = true;
+
+            DataBaseAccessController dbac = new DataBaseAccessController(SearchParameters);
 
             dbac.PullFromDatabase("Server = tcp:softdev.database.windows.net,1433; Initial Catalog = AutoTurret; "
                       + "Persist Security Info = False; User ID = ironicism; Password =unknown88;"
@@ -30,8 +36,12 @@ namespace Auto_Turret.Tests
         [TestMethod]
         public void GetDatabaseString_Test()
         {
-            List<string> foo = new List<string>();
-            DataBaseAccessController dbac = new DataBaseAccessController(foo);
+            this.SearchParameters.FromDate = "2017-15-7";
+            this.SearchParameters.ToDate = "2017-15-7";
+            this.SearchParameters.SearchFireEvents = true;
+            this.SearchParameters.SearchWarnings = true;
+
+            DataBaseAccessController dbac = new DataBaseAccessController(SearchParameters);
 
             StringAssert.Contains(dbac.GetDatabaseString(), "Server = tcp:softdev.database.windows.net,1433; Initial Catalog = AutoTurret;"
                     + "Persist Security Info = False; User ID = ironicism; Password =Unknown8*;"
@@ -41,9 +51,12 @@ namespace Auto_Turret.Tests
         [TestMethod]
         public void GetQueryString()
         {
-            List<string> foo = new List<string>();
+            this.SearchParameters.FromDate = "2017-15-7";
+            this.SearchParameters.ToDate = "2017-15-7";
+            this.SearchParameters.SearchFireEvents = true;
+            this.SearchParameters.SearchWarnings = true;
 
-            DataBaseAccessController dbac = new DataBaseAccessController(foo);
+            DataBaseAccessController dbac = new DataBaseAccessController(SearchParameters);
 
             StringAssert.Contains(dbac.GetQueryString(), "SELECT turret_name, eventtype, eventtime FROM dbo.Turrets, dbo.Events WHERE Turrets.turret_id=Events.fk_turret_id");
         }

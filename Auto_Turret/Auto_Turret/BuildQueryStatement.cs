@@ -54,9 +54,15 @@ namespace Auto_Turret
         {
             WhereStatement += "WHERE ";
 
+            AddTurretToWhereStatement(arguments);
             AddFromDateToWhereStatement(arguments.FromDate);
             AddToDateToWhereStatement(arguments.ToDate);
             AddEventTypesToWhereStatement(arguments);
+        }
+
+        private void AddTurretToWhereStatement(SearchParametersData arguemnts)
+        {
+            WhereStatement += "Turrets.turret_id=Events.fk_turret_id AND ";
         }
 
         private void AddFromDateToWhereStatement(string fromDate)
@@ -93,11 +99,11 @@ namespace Auto_Turret
         {
             if (arguments.SearchFireEvents)
             {
-                WhereStatement += @" AND Events.event_type = ""shots fired""";
+                WhereStatement += @" AND Events.eventtype = 'shots fired'";
             }
             else
             {
-                WhereStatement += @" AND Events.event_type = ""warning""";
+                WhereStatement += @" AND Events.eventtype = 'warning'";
             }
         }
     }

@@ -116,7 +116,7 @@ namespace Auto_TurretTests
             this.SearchParameters.SearchFireEvents = true;
             this.SearchParameters.SearchWarnings = true;
 
-            List<string> columns = new List<string> { "turret_name" };
+            List<string> columns = new List<string> { "turretname" };
             BuildQueryStatement foo = new BuildQueryStatement(columns, this.tables, this.SearchParameters);
 
             Assert.AreEqual(false, foo.SelectStatement.Contains(","));
@@ -181,7 +181,7 @@ namespace Auto_TurretTests
         //Test methods for BuildQueryStatement CombineWhereStatement() method
         //
         [TestMethod]
-        public void IQuery_BuildQueryStatement_CombineWhereStatement_1LessCommaThankListCount_Test()
+        public void IQuery_BuildQueryStatement_CombineWhereStatement_1LessAndThanParameters_Test()
         {
             this.SearchParameters.FromDate = "";
             this.SearchParameters.ToDate = "";
@@ -193,6 +193,19 @@ namespace Auto_TurretTests
             int count = Regex.Matches(foo.WhereStatement, "AND").Count;
 
             Assert.AreEqual(2, count);
+        }
+
+        [TestMethod]
+        public void IQuery_BuildQueryStatement_CombineWhereStatement_AddTurretToWhereStatement_Test()
+        {
+            this.SearchParameters.FromDate = "";
+            this.SearchParameters.ToDate = "";
+            this.SearchParameters.SearchFireEvents = true;
+            this.SearchParameters.SearchWarnings = true;
+
+            BuildQueryStatement foo = new BuildQueryStatement(this.columns, this.tables, this.SearchParameters);
+
+            StringAssert.Contains(foo.WhereStatement, "Turrets.turret_id=Events.fk_turret_id");
         }
 
         [TestMethod]

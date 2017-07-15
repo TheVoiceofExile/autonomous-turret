@@ -24,8 +24,8 @@ namespace Auto_Turret
 
         private void GetData_Button_Click(object sender, EventArgs e)
         {
-            
-            List<string> dates = new List<string>();
+
+            SearchParametersData searchParameters = new SearchParametersData();
 
             using (CreateSummary createSummary = new CreateSummary())
             {
@@ -33,8 +33,8 @@ namespace Auto_Turret
 
                 if (createSummary.DialogResult ==DialogResult.OK)
                 {
-                    dates = createSummary.Dates;
-                    DataBaseAccessController controller = new DataBaseAccessController(dates);
+                    searchParameters = createSummary.SearchParameters;
+                    DataBaseAccessController controller = new DataBaseAccessController(searchParameters);
                     controller.PullFromDatabase(controller.GetDatabaseString());
                     List<TurretnameEventtypeEventtimeData> databaseResults = controller.TurretEvents;
                     AddToListView(databaseResults);

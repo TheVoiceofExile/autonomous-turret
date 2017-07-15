@@ -12,7 +12,7 @@ namespace Auto_Turret
 {
     public partial class CreateSummary : Form
     {
-        public List<string> Dates;
+        public SearchParametersData SearchParameters;
         public CreateSummary()
         {
             InitializeComponent();
@@ -23,7 +23,7 @@ namespace Auto_Turret
         {
             FromDate.Value = DateTime.Today.AddDays(0);
             ToDate.Value = DateTime.Today.AddDays(0);
-            Dates = new List<string>();
+            SearchParameters = new SearchParametersData();
         }
 
         private void FromDate_ValueChanged(object sender, EventArgs e)
@@ -39,8 +39,8 @@ namespace Auto_Turret
         private void CreateSummaryButton_Click(object sender, EventArgs e)
         {
             ToDate.Value = ToDate.Value.AddDays(1);
-            Dates.Add(FromDate.Value.ToString("yyyy-MM-dd"));
-            Dates.Add(ToDate.Value.ToString("yyyy-MM-dd"));
+            SearchParameters.FromDate = FromDate.Value.ToString("yyyy-MM-dd");
+            SearchParameters.ToDate =  ToDate.Value.ToString("yyyy-MM-dd");
             Debug.WriteLine(ToDate.Value);
             this.DialogResult = DialogResult.OK;
             this.Close();

@@ -35,16 +35,16 @@
             this.Wifi_Connect_Button = new System.Windows.Forms.Button();
             this.Exit_Application_Button = new System.Windows.Forms.Button();
             this.DatabaseRecepticle = new System.Windows.Forms.ListView();
+            this.TurretNames = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.EventTypes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.EventTimes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.TurretNames = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // GetData_Button
             // 
-            this.GetData_Button.Location = new System.Drawing.Point(12, 399);
+            this.GetData_Button.Location = new System.Drawing.Point(875, 12);
             this.GetData_Button.Name = "GetData_Button";
-            this.GetData_Button.Size = new System.Drawing.Size(75, 23);
+            this.GetData_Button.Size = new System.Drawing.Size(143, 23);
             this.GetData_Button.TabIndex = 1;
             this.GetData_Button.Text = "Get Data";
             this.GetData_Button.UseVisualStyleBackColor = true;
@@ -52,18 +52,18 @@
             // 
             // Login_Button
             // 
-            this.Login_Button.Location = new System.Drawing.Point(729, 506);
+            this.Login_Button.Location = new System.Drawing.Point(875, 448);
             this.Login_Button.Name = "Login_Button";
-            this.Login_Button.Size = new System.Drawing.Size(75, 23);
+            this.Login_Button.Size = new System.Drawing.Size(143, 23);
             this.Login_Button.TabIndex = 2;
             this.Login_Button.Text = "Log In";
             this.Login_Button.UseVisualStyleBackColor = true;
             // 
             // Clear_Button
             // 
-            this.Clear_Button.Location = new System.Drawing.Point(943, 399);
+            this.Clear_Button.Location = new System.Drawing.Point(875, 41);
             this.Clear_Button.Name = "Clear_Button";
-            this.Clear_Button.Size = new System.Drawing.Size(75, 23);
+            this.Clear_Button.Size = new System.Drawing.Size(143, 23);
             this.Clear_Button.TabIndex = 3;
             this.Clear_Button.Text = "Clear List";
             this.Clear_Button.UseVisualStyleBackColor = true;
@@ -71,9 +71,9 @@
             // 
             // Wifi_Connect_Button
             // 
-            this.Wifi_Connect_Button.Location = new System.Drawing.Point(810, 506);
+            this.Wifi_Connect_Button.Location = new System.Drawing.Point(875, 477);
             this.Wifi_Connect_Button.Name = "Wifi_Connect_Button";
-            this.Wifi_Connect_Button.Size = new System.Drawing.Size(127, 23);
+            this.Wifi_Connect_Button.Size = new System.Drawing.Size(143, 23);
             this.Wifi_Connect_Button.TabIndex = 4;
             this.Wifi_Connect_Button.Text = "Connect to Network";
             this.Wifi_Connect_Button.UseVisualStyleBackColor = true;
@@ -81,9 +81,9 @@
             // 
             // Exit_Application_Button
             // 
-            this.Exit_Application_Button.Location = new System.Drawing.Point(943, 506);
+            this.Exit_Application_Button.Location = new System.Drawing.Point(875, 506);
             this.Exit_Application_Button.Name = "Exit_Application_Button";
-            this.Exit_Application_Button.Size = new System.Drawing.Size(75, 23);
+            this.Exit_Application_Button.Size = new System.Drawing.Size(143, 23);
             this.Exit_Application_Button.TabIndex = 5;
             this.Exit_Application_Button.Text = "Exit";
             this.Exit_Application_Button.UseVisualStyleBackColor = true;
@@ -99,12 +99,17 @@
             this.DatabaseRecepticle.GridLines = true;
             this.DatabaseRecepticle.Location = new System.Drawing.Point(12, 12);
             this.DatabaseRecepticle.Name = "DatabaseRecepticle";
-            this.DatabaseRecepticle.Size = new System.Drawing.Size(1006, 381);
+            this.DatabaseRecepticle.Size = new System.Drawing.Size(857, 517);
             this.DatabaseRecepticle.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.DatabaseRecepticle.TabIndex = 6;
             this.DatabaseRecepticle.UseCompatibleStateImageBehavior = false;
             this.DatabaseRecepticle.View = System.Windows.Forms.View.Details;
             this.DatabaseRecepticle.SelectedIndexChanged += new System.EventHandler(this.DatabaseRecepticle_SelectedIndexChanged_1);
+            // 
+            // TurretNames
+            // 
+            this.TurretNames.Text = "Turret Names";
+            this.TurretNames.Width = 250;
             // 
             // EventTypes
             // 
@@ -115,11 +120,6 @@
             // 
             this.EventTimes.Text = "Event Times";
             this.EventTimes.Width = 506;
-            // 
-            // TurretNames
-            // 
-            this.TurretNames.Text = "Turret Names";
-            this.TurretNames.Width = 250;
             // 
             // Auto_Turret_Main_Page
             // 

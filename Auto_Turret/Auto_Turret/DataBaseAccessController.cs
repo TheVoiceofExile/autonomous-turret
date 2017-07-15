@@ -12,10 +12,11 @@ namespace Auto_Turret
     {
         public List<TurretnameEventtypeEventtimeData> TurretEvents = new List<TurretnameEventtypeEventtimeData>();
 
-        List<string> additionalArgs;
-        public DataBaseAccessController(List<string> additionalArgs)
+        SearchParametersData SearchParameters;
+
+        public DataBaseAccessController(SearchParametersData searchParameters)
         {
-            this.additionalArgs = additionalArgs;
+            this.SearchParameters = searchParameters;
         }
         public void PullFromDatabase(string connectionString)
         {
@@ -87,8 +88,8 @@ namespace Auto_Turret
             List<string> where = new List<string> { "Turrets.turret_id=Events.fk_turret_id" };
             
 
-            BuildQueryStatement statement = new BuildQueryStatement(select, from, where);
-
+            BuildQueryStatement statement = new BuildQueryStatement(select, from, SearchParameters);
+            Debug.WriteLine(statement);
             return statement.BuildQueryString();
         }
 
@@ -125,46 +126,6 @@ namespace Auto_Turret
             {
                 TurretEvents.Add(new TurretnameEventtypeEventtimeData(reader.GetString(0), reader.GetString(1), reader.GetDateTime(2)));
             }
-        }
-
-        private List<string> ConfigureAdditionalArguments(List<string> where)
-        {
-            if (AreAdditionalArgsTheSame())
-            {
-                where = IfAdditionalArgsAreSame(where);
-            }
-            else if (AreAdditionalArgsTheSame())
-            {
-                where = IfAdditionalArgsAreDifferent(where);
-            }
-
-            return where;
-        }
-
-        private bool AreAdditionalArgsTheSame()
-        {
-            if(additionalArgs[0] == additionalArgs[1])
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private List<string> IfAdditionalArgsAreSame(List<string> where)
-        {
-            where.Add( "Events.eventtime >= " + "Convert(datetime, '" + additionalArgs[0] + "')");
-            return where;
-        }
-
-        private List<string> IfAdditionalArgsAreDifferent(List<string> where)
-        {
-            where.Add("Events.eventtime >= " + "Convert(datetime, '" + additionalArgs[0] + "')");
-            where.Add("Events.eventtime < " + "Convert(datetime, '" + additionalArgs[1] + "')");
-
-            return where;
         }
 
         public string GetDatabaseString()

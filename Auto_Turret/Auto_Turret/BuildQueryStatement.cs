@@ -12,11 +12,11 @@ namespace Auto_Turret
         public string SelectStatement = string.Empty;
         public string FromStatement = string.Empty;
         public string WhereStatement = string.Empty;
-        public BuildQueryStatement(List<string> columns, List<string> tables, List<string> arguments)
+        public BuildQueryStatement(List<string> columns, List<string> tables, SearchParametersData arguments)
         {
             CombineSelectStatement(columns);
             CombineFromStatement(tables);
-            CheckWhichWhereStatementToUse(arguments);
+            CombineWhereStatement(arguments);
         }
 
         public string BuildQueryString()
@@ -50,27 +50,54 @@ namespace Auto_Turret
             }
         }
 
-        private void CheckWhichWhereStatementToUse(List<string> arguments)
-        {
-            if(arguments.Count == 0)
-            {
-                WhereStatement = string.Empty;
-            }
-            else
-            {
-                CombineWhereStatement(arguments);
-            }
-        }
-
-        private void CombineWhereStatement(List<string> arguments)
+        private void CombineWhereStatement(SearchParametersData arguments)
         {
             WhereStatement += "WHERE ";
 
-            for(int i = 0; i < arguments.Count; i++)
+            AddFromDateToWhereStatement(arguments.FromDate);
+            AddToDateToWhereStatement(arguments.ToDate);
+            AddEventTypesToWhereStatement(arguments);
+        }
+
+        private void AddFromDateToWhereStatement(string fromDate)
+        {
+            WhereStatement += "Events.eventtime >= " + "Convert(datetime, '" + fromDate + "') AND ";
+        }
+
+        private void AddToDateToWhereStatement(string toDate)
+        {
+            WhereStatement += "Events.eventtime < " + "Convert(datetime, '" + toDate + "')";
+        }
+
+        private void AddEventTypesToWhereStatement(SearchParametersData arguments)
+        {
+            if(AreSelectedEventTypesNotEqual(arguments))
             {
-                WhereStatement += arguments[i];
-                if (i < arguments.Count - 1)
-                    WhereStatement += " AND ";
+                AddEventToWhereStatement(arguments);
+            }
+        }
+
+        private bool AreSelectedEventTypesNotEqual(SearchParametersData arguments)
+        {
+            if(arguments.SearchFireEvents != arguments.SearchWarnings)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void AddEventToWhereStatement(SearchParametersData arguments)
+        {
+            if (arguments.SearchFireEvents)
+            {
+                WhereStatement += @" AND Events.event_type = ""shots fired""";
+            }
+            else
+            {
+                WhereStatement += @" AND Events.event_type = ""warning""";
             }
         }
     }

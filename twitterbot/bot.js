@@ -66,7 +66,8 @@ const postDirectMessage = function (queryOutput) {
         'direct_messages/new', {
             user_id: '2889985308', // @ra_forero
             text: emoji.emojify(`${numEvents} events in turret :hand: :robot_face:`),
-        }, 
+        },
+        
         function (err, data, response) {
             if (err) {
                 console.log(err);

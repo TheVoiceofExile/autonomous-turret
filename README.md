@@ -39,6 +39,8 @@ The auto-turret will be deployed with certain abilities. The auto-turret will ac
 > [Unit Tests](https://github.com/raforero/autonomous-turret/tree/master/Auto_Turret/Auto_TurretTests)
 
 > #### [Twitterbot](https://github.com/raforero/autonomous-turret/tree/master/twitterbot)
+> #### [Turret Tracking](https://github.com/raforero/autonomous-turret/blob/master/Ultrasonic_Prototype.ino)
+
 
 ## Photo/Video Log :camera:
 > #### [Sprint 1](https://drive.google.com/drive/folders/0B_K0lYAFjuCgelZNa2JibEVWbjg)
@@ -49,6 +51,10 @@ The auto-turret will be deployed with certain abilities. The auto-turret will ac
 >>###### [Computer App](https://www.youtube.com/watch?v=OBrXt9I1gWo&feature=youtu.be)
 
 > #### [Sprint 3](https://drive.google.com/open?id=0B943z9Iq2MKwU29UNWJiRE1jODQ)
+>>###### [Firing Success](https://drive.google.com/open?id=0B_K0lYAFjuCgNTVUNXdvWlFXQnc)
+>>###### [Spin Track](https://drive.google.com/open?id=0B_K0lYAFjuCgY1Y1Ym1acURtNEE)
+
+
 
 ## Other
 > #### [Expense Report](https://docs.google.com/spreadsheets/d/1CcWzhmxmHYezIC98jgXHLFN2w0XMIJUq4YqEYpALn0Q/edit?usp=sharing) :moneybag:

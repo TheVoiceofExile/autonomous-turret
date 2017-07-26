@@ -79,7 +79,7 @@ const postDirectMessage = function (queryOutput) {
                 console.log(err);
             } else {
                 console.log('Direct message sent to @ra_forero.');
-                //process.exit();
+                // process.exit();
             }
         }
     );

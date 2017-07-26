@@ -28,9 +28,15 @@ connection.on('connect', function (err) {
         console.log(err);
     } else {
         console.log('Connected to database.')
-        queryDatabase();
+        execute();
     }
 });
+
+const execute = function () {
+    queryDatabase();
+}
+
+setInterval(execute, 5000);
 
 const queryDatabase = function () { 
     console.log('Reading rows from table...');
@@ -73,7 +79,7 @@ const postDirectMessage = function (queryOutput) {
                 console.log(err);
             } else {
                 console.log('Direct message sent to @ra_forero.');
-                process.exit();
+                //process.exit();
             }
         }
     );

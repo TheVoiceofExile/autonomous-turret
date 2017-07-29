@@ -1,5 +1,6 @@
 const Twit = require('twit');
 const Connection = require('tedious').Connection;
+const TYPES = require('tedious').TYPES;
 const Request = require('tedious').Request;
 const emoji = require('node-emoji');
 
@@ -27,24 +28,23 @@ connection.on('connect', function (err) {
     if (err) {
         console.log(err);
     } else {
-        console.log('Connected to database.')
+        console.log('Connected to database.');
         execute();
     }
 });
 
 const execute = function () {
-    queryDatabase();
+    countEvents();
 }
 
 setInterval(execute, 5000);
 
-const queryDatabase = function () { 
+const countEvents = function () {
     console.log('Reading rows from table...');
 
     request = new Request(
-        "SELECT COUNT(*) " + 
-        "FROM dbo.Turrets, dbo.Events " + 
-        "WHERE Turrets.turret_id = Events.fk_turret_id ",
+        "SELECT @count=(COUNT(*)) " + 
+        "FROM dbo.Events ",
  
         function (err, rowCount, rows) {
             if (err) {
@@ -55,23 +55,20 @@ const queryDatabase = function () {
         }
     );
 
-    request.on('row', function (columns) {
-        columns.forEach(function (column) {
-            console.log('Number of events in turret: %s\t%s', column.metadata.colName, column.value);
-            postDirectMessage(column.value);
-        });
+    request.addOutputParameter('count', TYPES.Int);
+
+    request.on('returnValue', function (parameterName, value, metadata) {
+        console.log('Event Count: ' + value);
     });
 
     connection.execSql(request);
 }
 
-const postDirectMessage = function (queryOutput) {
-    const numEvents = queryOutput;
-
+const postDirectMessage = function () {
     twitterbot.post(
         'direct_messages/new', {
             user_id: '2889985308', // @ra_forero
-            text: emoji.emojify(`${numEvents} events in turret :hand: :robot_face:`),
+            text: emoji.emojify(':warning: Your turret has been activated!'),
         },
         
         function (err, data, response) {

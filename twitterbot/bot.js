@@ -4,7 +4,9 @@ const TYPES = require('tedious').TYPES;
 const Request = require('tedious').Request;
 const emoji = require('node-emoji');
 
-console.log('BOT ACTIVATED.');
+const numEvents = [0];
+
+console.log('BOT ACTIVATED.\n');
 
 const twitterbot = new Twit({
     consumer_key: 'BLMFmhRGVSbimKjFcvhKj28jL',
@@ -28,19 +30,19 @@ connection.on('connect', function (err) {
     if (err) {
         console.log(err);
     } else {
-        console.log('Connected to database.');
+        console.log('Connected to database.\n');
         execute();
     }
 });
 
-const execute = function () {
+setInterval(execute, 10000);
+
+function execute() {
     countEvents();
 }
 
-setInterval(execute, 5000);
-
-const countEvents = function () {
-    console.log('Reading rows from table...');
+function countEvents() {
+    console.log('\n\nCounting events...\n');
 
     request = new Request(
         "SELECT @count=(COUNT(*)) " + 
@@ -50,7 +52,7 @@ const countEvents = function () {
             if (err) {
                 console.log(err);
             } else {
-                console.log(rowCount + ' row(s) returned');
+                console.log('Query complete.\n');
             }
         }
     );
@@ -58,13 +60,19 @@ const countEvents = function () {
     request.addOutputParameter('count', TYPES.Int);
 
     request.on('returnValue', function (parameterName, value, metadata) {
-        console.log('Event Count: ' + value);
+        if (value > numEvents[numEvents.length - 1]) {
+            console.log('New event found.\n');
+            numEvents.push(value);
+            postDirectMessage();
+        } else {
+            console.log('No new events.\n');
+        }
     });
 
     connection.execSql(request);
 }
 
-const postDirectMessage = function () {
+function postDirectMessage() {
     twitterbot.post(
         'direct_messages/new', {
             user_id: '2889985308', // @ra_forero
@@ -75,8 +83,7 @@ const postDirectMessage = function () {
             if (err) {
                 console.log(err);
             } else {
-                console.log('Direct message sent to @ra_forero.');
-                // process.exit();
+                console.log('Direct message sent to @ra_forero.\n');
             }
         }
     );

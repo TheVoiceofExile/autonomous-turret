@@ -1,30 +1,39 @@
-// Matt Winchester
+// Matt Winchester and Cameron Alexander
 // Sonic Sensor Range Finder Prototype Code
 // 2017
 
 #include <Servo.h>
 #include <Wire.h>
 
+// Firing constants
+Servo prepGun;     //Servo for pushing the motor on button
+Servo pullTrigger; //servo for pushing down the trigger
+
+int warnpos = 150; //position to push down motor button
+int standbypos = warnpos - 20;
+int firepos = 0;  //position for pushing down the trigger
+int initialpos = 180;
+
 // Constants
-int left_trig = 10;
-int left_echo = 11;
+int left_trig = 8;
+int left_echo = 7;
 
-int right_trig = 3;
-int right_echo = 2;
+int right_trig = 9;
+int right_echo = 10;
 
-int mid_trig = 7;
-int mid_echo = 6;
+int mid_trig = 11;
+int mid_echo = 12;
 
-int pan_pin = 9;
-int tilt_pin = 8;
+int pan_pin = 3;
+int tilt_pin = 2;
 
 int LEFT_MIN = 10000;
 int MID_MIN = 10000;
 int RIGHT_MIN = 10000;
 
-int FIRE_TIMER_MS = 2500;
+int FIRE_TIMER_MS = 2000;
 
-int OUTLIER_THRESHOLD = 300;
+int OUTLIER_THRESHOLD = 500;
 
 int WARN_BLINK_MS = 2000;
 int FIRE_BLINK_MS = 200;
@@ -41,7 +50,9 @@ long time_since_track_event; //millis
 long previous_lock = 0;
 long time_of_last_blink = 0; 
 
-float warn_distance = 100;
+
+
+float warn_distance = 70;
 //float fire_distance = ;
 
 int warning_pin = 13; //on board LED
@@ -62,9 +73,14 @@ void wait_for_usb_disconnect()
 }
 
 void setup() {
-  //Serial.begin(9600);
-
   wait_for_usb_disconnect();
+
+  prepGun.attach(4);      //pins the servos connect to on the arduino
+  pullTrigger.attach(5);
+  
+  prepGun.write(standbypos); //
+  pullTrigger.write(initialpos); 
+  
 
   pinMode(left_trig, OUTPUT);
   pinMode(left_echo, INPUT);
@@ -76,11 +92,10 @@ void setup() {
   pinMode(warning_pin, OUTPUT);
 
   pan.attach(pan_pin);
-  tilt.attach(tilt_pin);
-  safe_tilt(90);
+  //tilt.attach(tilt_pin);
+  //safe_tilt(90);
 
   current_mode = 0;
-  turning_direction = 0;
 
 }
 
@@ -94,7 +109,6 @@ void print_distances()
   
   Serial.print("Center: ");
   Serial.println(mid_cm);
-
   
 }
 
@@ -151,39 +165,28 @@ void spin()
   turn_left();  
   read_middle();
 
+  //Go into tracking mode!
   if(mid_cm < warn_distance)
-  {
-    digitalWrite(warning_pin, HIGH);
-  }
-  else
-  {
-    digitalWrite(warning_pin, LOW);
-  }
-  
-
-  if(mid_cm < warn_distance)
-  {
-    //Go into tracking mode!
-
-  stop_turning();
-  change_to_track();
+  {   
+    stop_turning();
+    change_to_track();
     
     current_mode = 1;
-   time_since_track_event = millis();
-   previous_lock = time_since_track_event;
+    time_since_track_event = millis();
+    previous_lock = time_since_track_event;
   }
-    //spin until themiddle sensoe sees something in the warning distance, then track
 }
 
 void change_to_track()
 {
   digitalWrite(warning_pin, HIGH);
-  delay(500);
+  delay(1000);
   digitalWrite(warning_pin, LOW);
   delay(100);
- digitalWrite(warning_pin, HIGH);
-  delay(500);
-
+  digitalWrite(warning_pin, HIGH);
+  delay(1000);
+  digitalWrite(warning_pin, LOW);
+  
 }
 
 void blink_warn()
@@ -205,8 +208,6 @@ void blink_warn()
 
 void track()
 {
-  blink_warn();
-  //blink the warning light
   read_all();
 
   //check to make sure something is still visible
@@ -216,7 +217,6 @@ void track()
   }
   
   // read left, right, and mid. compare them, then turn in the closest direction. 
-
   if(left_cm < right_cm && left_cm < mid_cm)
   {
     turn_left();
@@ -234,19 +234,21 @@ void track()
   else if(mid_cm < left_cm && mid_cm < right_cm)
   {
       stop_turning();
+      
       //First sighting
       if (previous_lock == 0)
       {
         previous_lock = millis(); 
       }
 
+      //Continueing a lock on
       else if( millis() - previous_lock > FIRE_TIMER_MS)
       {
         fire();
         previous_lock = millis();
       }
       
-    delay(100);
+    delay(300);
   
   }
   
@@ -254,8 +256,7 @@ void track()
   // 10 seconds with no events, go back to spinning
   if(millis() - time_since_track_event > 10000)
   {
-    digitalWrite(warning_pin, HIGH);
-    current_mode = 0;
+    //digitalWrite(warning_pin, HIGH);
     change_to_spin();
   }
 
@@ -267,11 +268,14 @@ void change_to_spin()
   for (i = 0; i < 20; i++)
   {
     digitalWrite(warning_pin, HIGH);
-    delay(20);
+    delay(200);
     digitalWrite(warning_pin, LOW);
-    delay(10);
+    delay(100);
   }
+  current_mode = 0;
   
+  prepGun.write(standbypos);  
+
 }
 
 void read_all()
@@ -283,28 +287,63 @@ void read_all()
 
 void fire()
 {
+  prepGun.write(warnpos);
   
+  int i = 0;
+  for (i = 0; i < 2; i++)
+  {
+    digitalWrite(warning_pin, HIGH);
+    delay(100);
+    digitalWrite(warning_pin, LOW);
+    delay(50);
+    
+    digitalWrite(warning_pin, HIGH);
+    delay(100);
+    digitalWrite(warning_pin, LOW);
+    delay(1000);
+  }
+
+  pullTrigger.write(firepos);
+  delay(1000);
+  pullTrigger.write(initialpos);
+  prepGun.write(standbypos);
+
 }
 
 void turn_right()
 {
-  pan.write(80);
+//  if(turning_direction == 2)
+//  {
+//      return;
+//  }
+  pan.write(83);
+    
+//  turning_direction == 2;
+
 }
 
 void turn_left()
 {
-  if(turning_direction == 1)
-  {
-      return;
-  }
+//  if(turning_direction == 0)
+//  {
+//      return;
+//  }
   
-  pan.write(100);
-  turning_direction == 1;
+  pan.write(97);
+//  turning_direction == 0;
 }
 
 void stop_turning()
 {
+//  if(turning_direction == 1)
+//  {
+//      return;
+//  }
+  
   pan.write(90);
+
+ // turning_direction == 1;
+
 }
 
 float microsecondsToCentimeters(unsigned long microseconds)
